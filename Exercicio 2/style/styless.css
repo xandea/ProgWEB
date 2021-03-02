@@ -1,0 +1,41 @@
+
+#headerFont{
+    font-size: 40px;
+    font-family: Georgia;
+    font-weight: bold;
+}
+
+#departamento{
+    font-size: 45px;
+    font-family: Georgia;
+    text-transform: uppercase;
+}
+
+#chefia{
+    background-color: green;
+    font-weight: bold;
+}
+
+#coordenadores{
+    font-size: 35px;
+    text-decoration: underline;
+    background-color: blue;
+}
+
+#metriCad{
+    font-size: 25px;
+    background-color: red;
+}
+#vazio{
+    background-color: blue;
+}
+
+#documentos{
+    background-image: repeating-linear-gradient(350deg,gray,white 10%);
+}
+
+#estrutura{
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
