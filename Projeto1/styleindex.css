@@ -7,6 +7,7 @@ body{
     display: flex;
     position: absolute;
     width: 100%;
+    height: auto;
     margin: 0px;
 }
 
@@ -68,9 +69,8 @@ header{
 .div-center{
     position: relative;
     width: 350px;
-    height: 340px;
+    height: 325px;
     margin: 100px 0px 0px 100px;
-    background-color: red;
 }
 .title{
     display: flex;
@@ -176,25 +176,17 @@ header{
 }
 
 
-
-footer{
+.text-footer{
     display: flex;
     position: relative;
     width: 100%;
-    height: 146px;
-    background-color: #0d3685;
-    
-}
-.text-footer{
-    display: flex;
-    position: absolute;
-    width: 100%;
-    height: 50%;
+    height: 75px;
     background-color: red;
 }
 .button-footer{
     display: flex;
+    position: relative;
     width: 100%;
-    height: 50%;
+    height: 75px;
     background-color: black;
 }
