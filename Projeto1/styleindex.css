@@ -1,8 +1,13 @@
+body{
+    margin:0px;
+    background-color: blue;
+}
+
 .background-image{
     display: flex;
     position: fixed;
     width: 100%;
-    margin: 0;
+    margin: 0px;
 }
 
 .title{
