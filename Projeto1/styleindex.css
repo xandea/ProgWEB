@@ -12,7 +12,7 @@ body{
 .quadrado{
     position: fixed;
     width: 350px;
-    height: 500px;
+    height: 320px;
     margin: 100px 0px 0px 100px;
 }
 .area-body-title{
@@ -22,6 +22,7 @@ body{
 .text-title{
     margin: 0;
     font-size: 40px;
+    color: white;
 }
 .area-subtitle{
     width: 100%;
@@ -30,6 +31,7 @@ body{
 .subtitulo{
     margin: 0;
     font-size: 15px;
+    color: white;
 }
 .area-button{
     display: flex;
@@ -54,6 +56,40 @@ body{
 }
 .text-button-link:active{
     text-decoration: underline;
+}
+.area-bank{
+    display: inline-flex;
+    justify-content: space-between;
+    width: 85%;
+    height: 40px;
+}
+.area-bank-blocks{
+    width: 40px;
+    height: 40px;
+}
+.area-bank-blocks-description{
+    width: 59px;
+    height: 40px;
+}
+.image-bank{
+    width: 100%;
+    height: 100%;
+}
+.text-bank{
+    margin: 0;
+    font-size: 15px;
+    color: white;
+}
+.area-term{
+    display: flex;
+    width: 100%;
+    height: 30px;
+    padding-top: 30px;
+}
+.text-term{
+    margin: 0;
+    font-size: 15px;
+    color: white;
 }
 
 
