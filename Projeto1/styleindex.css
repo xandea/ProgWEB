@@ -1,0 +1,15 @@
+.background-image{
+    display: flex;
+    position: fixed;
+    width: 100%;
+    margin: 0;
+}
+
+.title{
+    display: flex;
+    position: absolute;
+    width: 200px;
+    height: 120px;
+    background-color: black;
+    margin: 100px 200px 200px 30px;
+}
