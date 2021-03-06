@@ -1,11 +1,11 @@
-# ProgWeb
-Branch projeto1:
-Development clone of Paypal Website: https://www.paypal.com/br/home
+<h1 align="center">Web Development</h1>
+<h2>Branch: projeto1</h2>
+<p>Development clone of Paypal Website: https://www.paypal.com/br/home</p>
 
-Branch master:
-Exercises for web development 
+<h2>Branch: master</h2>
+<p>Exercises for web development</p>
 
-Names: 
-Alexandre Sampaio
-Leonardo Mateus
+<h2>Names</h2>
+<p>Alexandre Sampaio</p>
+<p>Leonardo Mateus</p>
 
