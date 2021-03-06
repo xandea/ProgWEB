@@ -1,11 +1,16 @@
 <h1 align="center">Web Development</h1>
-<h2>Branch: projeto1</h2>
+### Branch: projeto1
 <p>Development clone of Paypal Website: https://www.paypal.com/br/home</p>
 
-<h2>Branch: master</h2>
+### Branch: master
 <p>Exercises for web development</p>
 
-<h2>Names</h2>
+### Features
+- [x] Header
+- [x] Body
+- [ ] Footer
+- [ ] Responsive 
+
+### Names
 <p>Alexandre Sampaio</p>
 <p>Leonardo Mateus</p>
-
