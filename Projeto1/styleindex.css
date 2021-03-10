@@ -194,7 +194,7 @@ footer{
     background-color: #0d3685;
     color: white;
     width: 100%;
-    height: 101px;
+    height: 180px;
 }
 .footer-container{
     display: flex;
@@ -223,22 +223,18 @@ footer{
 
 /** responsividade @media notebook leonardo mateus **/
 
-@media only screen and (min-width: 700px) {
+@media only screen and (max-width: 700px) {
     .wrapper{
         display: flex;
-        max-width: 1000px;
+        max-width: 1300px;
         margin: 0 auto;
     }
 }
 /* responsividade para @media notebook alexandre*/
-@media only screen and (min-width: 1200px) {
+@media only screen and (max-width: 1200px) {
     .wrapper{
         display: flex;
         max-width: 1200px;
-        max-height: 550px;
         margin: 0 auto;
-    }
-    footer{
-        height: 180px;
     }
 }
