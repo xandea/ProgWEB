@@ -93,10 +93,9 @@ header{
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 350px;
-    height: 325px;
-    margin:75px 0 75px;
-
+    width: 450px;
+    height: 355px;
+    padding: 75px 0px 75px 0px;
 }
 .area-body-title{
     width: 100%;
@@ -105,38 +104,46 @@ header{
 }
 .text-title{
     margin: 0;
-    font-size: 40px;
+    font-size: 47px;
     color: white;
+    font-weight: lighter;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 .area-subtitle{
     width: 100%;
     height: 50px;
+    padding-top: 10px;
 }
 .subtitulo{
+    font-weight: 500;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 0;
-    font-size: 15px;
+    font-size: 21px;
     color: white;
 }
 .area-button{
     display: flex;
-    width: 100%;
+    width: 86%;
     height: 50px;
-    padding-top: 10px;
+    padding-top: 40px;
     margin-bottom: 20px;
     align-items: center;
 }
 .text-button{
+    justify-content: center;
     text-decoration: none;
     font-weight: bold;
     width: 85%;
-    height: 40px;
+    height: 50px;
     border: none;
-    border-radius: 20px;
+    border-radius: 25px;
     background-color: white;
     cursor: pointer;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
 }
 .text-button-link{
-    color: #0a4bcc;
+    color: #2f64cc;
     text-decoration: none;    
 }
 .text-button-link:active{
@@ -145,7 +152,7 @@ header{
 .area-bank{
     display: inline-flex;
     justify-content: space-between;
-    width: 85%;
+    width: 70%;
     height: 40px;
 }
 .area-bank-blocks{
@@ -155,6 +162,7 @@ header{
 .area-bank-blocks-description{
     width: 59px;
     height: 40px;
+    text-align: center;
 }
 .image-bank{
     width: 100%;
@@ -164,6 +172,8 @@ header{
     margin: 0;
     font-size: 15px;
     color: white;
+    font-weight: 500;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .area-term{
     display: flex;
@@ -172,11 +182,12 @@ header{
     padding-top: 30px;
 }
 .text-term{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 400;
     margin: 0;
     font-size: 15px;
     color: white;
 }
-
 footer{
     display: flex;
     position: relative;
@@ -185,25 +196,25 @@ footer{
     width: 100%;
     height: 101px;
 }
-
 .footer-container{
     display: flex;
     flex-direction: column;
     text-align: center;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
     height: 100%;
 }
 .text-footer{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 22px;
+    font-weight: 350;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 30px;
 }
 .button-footer{
-    padding: 10px 20px 10px 20px;
+    padding: 14px 20px 14px 20px;
     border: none;
     border-radius: 20px;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     color: #0d3685;
     background-color: white;
@@ -216,7 +227,18 @@ footer{
     .wrapper{
         display: flex;
         max-width: 1000px;
-        max-height: 425px;
         margin: 0 auto;
+    }
+}
+/* responsividade para @media notebook alexandre*/
+@media only screen and (min-width: 1200px) {
+    .wrapper{
+        display: flex;
+        max-width: 1200px;
+        max-height: 550px;
+        margin: 0 auto;
+    }
+    footer{
+        height: 180px;
     }
 }
