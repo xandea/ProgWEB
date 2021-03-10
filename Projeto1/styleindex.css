@@ -101,6 +101,7 @@ header{
 .area-body-title{
     width: 100%;
     height: 100px;
+    margin-bottom: 20px;
 }
 .text-title{
     margin: 0;
@@ -207,4 +208,15 @@ footer{
     color: #0d3685;
     background-color: white;
     cursor: pointer;
+}
+
+/** responsividade @media notebook leonardo mateus **/
+
+@media only screen and (min-width: 700px) {
+    .wrapper{
+        display: flex;
+        max-width: 1000px;
+        max-height: 425px;
+        margin: 0 auto;
+    }
 }
