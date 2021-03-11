@@ -189,7 +189,8 @@ header{
     color: white;
 }
 footer{
-    display: flex;
+    display: none;
+    clear: both;
     position: relative;
     background-color: #0d3685;
     color: white;
@@ -219,6 +220,14 @@ footer{
     color: #0d3685;
     background-color: white;
     cursor: pointer;
+}
+
+/* escondendo elementos mobile*/
+.header-mobile{
+    display: none;
+}
+.text-principal-container-mobile{
+    display: none;
 }
 
 /** responsividade @media notebook leonardo mateus **/
@@ -267,5 +276,69 @@ footer{
         display: flex;
         max-width: 1200px;
         margin: 0 auto;
+    }
+}
+
+/* responsividade para mobile */
+@media only screen and (max-width: 460px){
+    /* apagando componentes do header */
+    .background-container{
+        display: none;
+    }
+    .logo-container{
+        display: none;
+    }
+    .logo-branca{
+        display: none;
+    }
+    .link-container{
+        display: none;
+    }
+    .button-header{
+        display: none;
+    }
+    .div-center{
+        display: none;
+    }
+    .text-footer-mobile{
+        display: none;
+    }
+    /* aparecendo componentes mobile*/
+    .header-mobile{
+        display: flex;
+        position: relative;
+        padding: 10px 0px;
+        background-color: #0f4186;
+        justify-content: center;
+        align-items: center;
+    }
+    .button-header-mobile{
+        text-decoration: none;
+        color: white;
+        border: 1px solid white;
+        border-radius: 70px;
+        padding: 8px 20px 8px 20px;
+        font-size: 12px;
+    }
+    .logo-mobile{
+        width: 23px;
+        margin: 0px 120px;  
+    }
+    .text-principal-container-mobile{
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        width: 100%;
+        padding: 165px 0px;
+        background-color: #0f4186;
+        color: white;
+        align-items: center;
+        justify-content: center;
+    }
+    .text-principal-mobile{
+        margin: 0px;
+        font-size: 30px;
+        font-weight: lighter;
+        font-family: sans-serif;
     }
 }
