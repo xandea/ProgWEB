@@ -14,7 +14,7 @@ Turma: EC38C
 - [x] Header
 - [x] Body
 - [x] Footer
-- [ ] Responsive 
+- [x] Responsive 
 
 ### Names
 <p>Alexandre Sampaio</p>
