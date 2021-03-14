@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 5</title>
+    <style>
+        .square{
+            width: 600px;
+            height: 200px;
+            border: 1px solid black;
+        }
+        
+    
+    </style>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <fieldset class="square">
+        <legend>Cadastro</legend>
+        <span id="nova_tarefa">Nova Tarefa:</span>
+        <input id="input2" type="text">
+        <span id="span_ok"></span>
+        <ul id="myul">
+
+        </ul>
+        <button id="clean">Limpar</button>
+    </fieldset>
+
+    <script>
+        var text = document.querySelector('input');
+        text.addEventListener('change', function(){
+            var value = document.getElementById("input2").value;
+            if(value.length>3){
+                document.getElementById("input2").style.background="";
+                console.log("Maior que 3");
+                var li=document.createElement("li");
+                li.innerHTML=value;
+                //document.getElementsByClassName("myul").innerHTML="<li>"+value+"<li>";
+                document.getElementById("myul").appendChild(li);
+                document.getElementById("span_ok").innerText="OK!";
+                  
+            }else{
+                document.getElementById("input2").style.background="red";
+                document.getElementById("span_ok").innerText="Número menor que 3 caracteres";
+                console.log("Menor que 3");
+            }
+            
+        });
+        var limpar = document.getElementById("clean").addEventListener('click', function(){
+            var lista = document.getElementById("myul");
+            lista.innerHTML="";
+            
+        }); 
+
+        
+        
+    </script>
+</body>
+</html>
