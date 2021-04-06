@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Exchange from './IndexExchange';
+import SignUp from './SignUp';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
+    <SignUp/>
     <Exchange/>
   </React.StrictMode>,
   document.getElementById('root')
