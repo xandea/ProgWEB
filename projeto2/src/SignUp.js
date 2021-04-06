@@ -1,22 +1,40 @@
 import { render } from '@testing-library/react';
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom'
 
-    function Example() {
-        // Declaração das variaveis globais
-        const [email, setEmail] = useState("")
-        const [password, setPassword] = useState("")
+function Example() {
+    // Declaração das variaveis globais
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
-        const onChangeEmail = (e) => {
-            const emailValeu = e.target.value
-            setEmail(emailValeu)
+    const onChangeEmail = (e) => {
+        const emailValeu = e.target.value
+        setEmail(emailValeu)
+    }
+    const onChangePassword = (e) => {
+        const passwordValue = e.target.value
+        setPassword(passwordValue)
+    }
+
+        async function validationLogin() {
+            console.log(email)
+            console.log(password)
+            try {
+                const response = axios.post('https:/reqres.in/api/login',{
+                  email: email,//"eve.holt@reqres.in",
+                  password: password//"cityslicka"
+                  })
+                console.log(response);
+              } catch (error) {
+                console.error(error);
+              }
         }
-        const onChangePassword = (e) => {
-            const passwordValue = e.target.value
-            setPassword(passwordValue)
-        }
 
-        console.log(email)
-        console.log(password)
+        useEffect(()=>{
+            
+        })
+      
 
         return(
             <container>
@@ -36,7 +54,8 @@ import React, { Component, useState } from 'react';
                     onChange={onChangePassword}
                     />
                 </div>
-                <button>Enviar</button>
+                <button onClick={validationLogin}>Enviar</button>
+                <Link to="/exchange">Ir para a página exchange</Link>
             </container>
         )
 }

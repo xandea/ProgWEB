@@ -5,12 +5,15 @@ import App from './App';
 import Exchange from './IndexExchange';
 import SignUp from './SignUp';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <SignUp/>
-    <Exchange/>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Switch>
+      <Route path="/" exact={true} component={SignUp} />
+      <Route path="/exchange" component={Exchange} />
+    </Switch>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
