@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import Exchange from './IndexExchange';
 import SignUp from './SignUp';
+import HomePage from './HomePage';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/" exact={true} component={SignUp} />
+      <Route path="/" exact={true} component={HomePage} />
+      <Route path="/signUp"  component={SignUp} />
       <Route path="/exchange" component={Exchange} />
     </Switch>
   </BrowserRouter>,
