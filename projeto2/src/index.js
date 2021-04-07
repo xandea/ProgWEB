@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Exchange from './IndexExchange';
-import SignUp from './SignUp';
-import HomePage from './HomePage';
+import Exchange from './pages/Exchange/IndexExchange';
+import SignUp from './pages/Login/SignUp';
+import HomePage from './pages/Home/HomePage';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 

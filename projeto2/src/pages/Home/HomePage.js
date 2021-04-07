@@ -1,16 +1,16 @@
 import React from "react";
 import './HomePageStyle.css';
 import { Link } from 'react-router-dom';
-import Banner from './Images/banner.png';
-import LogoBranca from './Images/logotipo.svg';
-import Seta from './Images/seta.png';
-import Barra from './Images/menumobile.png';
-import LogoMobile from './Images/logomobile.png';
-import ItauIcon from './Images/itau-icon.png';
-import InterIcon from './Images/inter-icon.png';
-import NubankIcon from './Images/nubank-icon.png';
-import C6Icon from './Images/c6-icon.png';
-import BradescoIcon from './Images/bradesco-icon.png';
+import Banner from './../../Images/banner.png';
+import LogoBranca from './../../Images/logotipo.svg';
+import Seta from './../../Images/seta.png';
+import Barra from './../../Images/menumobile.png';
+import LogoMobile from './../../Images/logomobile.png';
+import ItauIcon from './../../Images/itau-icon.png';
+import InterIcon from './../../Images/inter-icon.png';
+import NubankIcon from './../../Images/nubank-icon.png';
+import C6Icon from './../../Images/c6-icon.png';
+import BradescoIcon from './../../Images/bradesco-icon.png';
 
 
 function HomePage() {
@@ -25,26 +25,26 @@ function HomePage() {
                         <img className="logo-branca" src={LogoBranca} alt="logotipo"/>
                     </section>
                     <section className="link-container">
-                        <a className="link-menu" href="">PARA VOCÊ <img src={Seta} className="img-seta"/></a>
-                        <a className="link-menu" href="">PARA SEU NEGÓCIO <img src={Seta}  className="img-seta"/></a>
-                        <a className="link-menu" href="">SUPORTE PARA NEGÓCIOS <img src={Seta}  className="img-seta"/></a>
+                        <a className="link-menu" href="/#">PARA VOCÊ <img src={Seta} className="img-seta" alt=""/></a>
+                        <a className="link-menu" href="/#">PARA SEU NEGÓCIO <img src={Seta}  className="img-seta" alt=""/></a>
+                        <a className="link-menu" href="/#">SUPORTE PARA NEGÓCIOS <img src={Seta}  className="img-seta" alt=""/></a>
                     </section>
                     <section className="button-header">
                         <Link to="/signUp"className="button-entrar">Entrar</Link>
-                        <a href="#"className="button-criar">Criar conta</a>
+                        <a href="/#" className="button-criar">Criar conta</a>
                     </section>
                 </section>
             </header>
             {/*ELEMENTOS MOBILE*/}
             <div className="header-mobile">
                 <section className="button-container-mobile">
-                    <a className="button-header-mobile"><img src={Barra} className="barra-menu"/>Menu</a>
+                    <a href="/#" className="button-header-mobile"><img src={Barra} className="barra-menu" alt=""/>Menu</a>
                 </section>
                 <section className="logo-container-mobile">
-                    <img className="logo-mobile"src={LogoMobile}/>
+                    <img className="logo-mobile"src={LogoMobile} alt=""/>
                 </section>
                 <section className="button-container-mobile">
-                    <a className="button-header-mobile">Entrar</a>
+                    <a href="/#" className="button-header-mobile">Entrar</a>
                 </section>
             </div>
             <div className="text-principal-container-mobile">
@@ -63,7 +63,7 @@ function HomePage() {
                     </div>
                     <div className="area-button"> 
                         <button className="text-button">
-                            <a href="" className="text-button-link">Crie uma conta grátis</a>
+                            <a href="/#" className="text-button-link">Crie uma conta grátis</a>
                         </button>
                     </div>
                     <section className="area-bank"> 
@@ -71,19 +71,19 @@ function HomePage() {
                             <h3 className="text-bank">Cartões de débito</h3>
                         </div>
                         <div className="area-bank-blocks">
-                            <img className="image-bank" src={ItauIcon}/>
+                            <img className="image-bank" src={ItauIcon} alt=""/>
                         </div>
                         <div className="area-bank-blocks">
-                            <img className="image-bank" src={BradescoIcon}/>
+                            <img className="image-bank" src={BradescoIcon} alt=""/>
                         </div>
                         <div className="area-bank-blocks">
-                            <img className="image-bank" src={NubankIcon}/>
+                            <img className="image-bank" src={NubankIcon} alt=""/>
                         </div>
                         <div className="area-bank-blocks">
-                            <img className="image-bank" src={C6Icon}/>
+                            <img className="image-bank" src={C6Icon} alt=""/>
                         </div>
                         <div className="area-bank-blocks">
-                            <img className="image-bank" src={InterIcon}/>
+                            <img className="image-bank" src={InterIcon} alt=""/>
                         </div>
                     </section>
                     <section>
@@ -103,7 +103,7 @@ function HomePage() {
                         </span>
                     </p>
                     <button className="button-footer">
-                        <a href="" className="button-footer">Paypal para Empresas</a>
+                        <a href="/#" className="button-footer">Paypal para Empresas</a>
                     </button>
                 </section>
             </footer>
