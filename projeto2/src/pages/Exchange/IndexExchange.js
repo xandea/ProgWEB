@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Exchange from './ApiExchange';
+import Exchange from '../../ApiExchange';
 
 class IndexExchange extends Component{
     
