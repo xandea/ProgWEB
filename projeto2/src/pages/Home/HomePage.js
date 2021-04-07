@@ -30,7 +30,7 @@ function HomePage() {
                         <a className="link-menu" href="/#">SUPORTE PARA NEGÓCIOS <img src={Seta}  className="img-seta" alt=""/></a>
                     </section>
                     <section className="button-header">
-                        <Link to="/signUp"className="button-entrar">Entrar</Link>
+                        <Link to="/signIn"className="button-entrar">Entrar</Link>
                         <a href="/#" className="button-criar">Criar conta</a>
                     </section>
                 </section>

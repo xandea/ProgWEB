@@ -2,6 +2,8 @@
 import React, {/*Component,*/ useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom'
+import LogoAzul from './../../Images/logoLogin.svg';
+import './SignIn.css';
 
 
 function Example() {
@@ -41,26 +43,37 @@ function Example() {
     })
       
     return(
-        <div>
-            <div>
-                <input 
+    <body className="bodySingIn">
+        <div className="container">
+            <img src={LogoAzul} className="logoTipo" alt="logo"/>
+            <div className="containerInputs">
+                <input
+                className="input" 
                 type="email" 
                 name="user"
                 placeholder="e-mail"
                 onChange={onChangeEmail}
                 />
-            </div>
-            <div>
-                <input 
+                <input
+                className="input"  
                 type="text" 
                 name="senha"
                 placeholder="senha"
                 onChange={onChangePassword}
                 />
             </div>
-            <button onClick={validationLogin}>Enviar</button>
+            <div className="containerButton">
+                <button className="buttonSend" onClick={validationLogin}>Avançar</button>
+            </div>
+            <div className="alternativeContainer">
+                <div className="line"><span className="alternative">ou</span></div>
+                
+            </div>
+            
             <Link to="/exchange">Ir para a página exchange</Link>
         </div>
+    </body>
+        
     )
 }
 
