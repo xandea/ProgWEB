@@ -24,19 +24,28 @@ function Example() {
     async function validationLogin() {
         console.log(email)
         console.log(password)
-        try {
-            const response = axios.post('https:/reqres.in/api/login',{
-              email: email,//"eve.holt@reqres.in",
-              password: password//"cityslicka"
-              })
-            console.log(response)
-            localStorage.setItem('@login/email', email)
-            //window.location.reload();
-            history.push("/exchange")
-          } catch (error) {
-            console.error(error);
-          }
+        if (email!=="" && password!==""){
+            try {           
+                const response = axios.post('https:/reqres.in/api/login',{
+                email: email,//"eve.holt@reqres.in",
+                password: password//"cityslicka"
+                })
+                if(response === 200){
+                    console.log(response)
+                    localStorage.setItem('@login/email', email)
+                    //window.location.reload();
+                    history.push("/exchange")
+                }   
+                
+            } catch (error) {
+                console.error(error);
+            }
+            
+        }else{
+            console.log("erro")
+        }
     }
+       
     
     useEffect(()=>{
         
@@ -62,12 +71,17 @@ function Example() {
                 onChange={onChangePassword}
                 />
             </div>
+
             <div className="containerButton">
-                <button className="buttonSend" onClick={validationLogin}>Avançar</button>
+                <button className="button" onClick={validationLogin}>Avançar</button>
             </div>
+
             <div className="alternativeContainer">
-                <div className="line"><span className="alternative">ou</span></div>
-                
+                <span className="alternative">ou</span>       
+            </div>
+
+            <div className="containerButtonCadastrar">
+                <button className="button" >Cadastrar-se</button>
             </div>
             
             <Link to="/exchange">Ir para a página exchange</Link>

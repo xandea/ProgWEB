@@ -37,7 +37,10 @@
     margin-top: 16px;
     width: 400px;
 }
-.buttonSend{
+.containerButtonCadastrar{
+    width: 400px;
+}
+.button{
     border-radius: 4px;
     border: 0.5px solid gray;
     color:white;
@@ -55,6 +58,4 @@
 .alternative{
    
 }
-.line{
-    
-}
+
