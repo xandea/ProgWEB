@@ -58,4 +58,11 @@
 .alternative{
    
 }
+.erroContainer{
+    display: none;
+    width: 100%;
+    justify-content: center;
+    background-color: red;
+    color: black;
+}
 

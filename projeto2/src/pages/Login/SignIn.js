@@ -1,5 +1,5 @@
 //import { render } from '@testing-library/react';
-import React, {/*Component,*/ useEffect, useState } from 'react';
+import React, {/*Component,*/ /*useEffect,*/ useState } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom'
 import LogoAzul from './../../Images/logoLogin.svg';
@@ -11,6 +11,8 @@ function Example() {
     // Declaração das variaveis globais
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [msgErro,setMsgErro] = useState("")
+    //const [status,setStatus] = useState("")
 
     const onChangeEmail = (e) => {
         const emailValeu = e.target.value
@@ -22,35 +24,36 @@ function Example() {
     }
 
     async function validationLogin() {
-        console.log(email)
-        console.log(password)
+        
         if (email!=="" && password!==""){
             try {           
-                const response = axios.post('https:/reqres.in/api/login',{
+                const response = await axios.post('https:/reqres.in/api/login',{
                 email: email,//"eve.holt@reqres.in",
                 password: password//"cityslicka"
                 })
-                if(response === 200){
-                    console.log(response)
-                    localStorage.setItem('@login/email', email)
-                    //window.location.reload();
-                    history.push("/exchange")
-                }   
+                console.log(email)
+                console.log(password)
+                console.log(response.status)
+                //setStatus(response.status)
+                localStorage.setItem('@login/email', email)
+                //window.location.reload();
+                history.push("/exchange")   
                 
-            } catch (error) {
-                console.error(error);
+                     
+            } catch (error) {               
+                if(error.response.status===400){
+                    //setStatus("400")
+                    setMsgErro("Usuario não cadastrado")
+                    document.getElementsByClassName("erroContainer")[0].style.display="flex"
+                }
             }
-            
         }else{
-            console.log("erro")
+            setMsgErro("Campos vazios(1 ou +)")
+            //setStatus("vazio")
+            document.getElementsByClassName("erroContainer")[0].style.display="flex"
         }
     }
-       
-    
-    useEffect(()=>{
-        
-    })
-      
+  
     return(
     <body className="bodySingIn">
         <div className="container">
@@ -74,6 +77,9 @@ function Example() {
 
             <div className="containerButton">
                 <button className="button" onClick={validationLogin}>Avançar</button>
+            </div>
+            <div className="erroContainer">
+                <span>Erro:{msgErro}</span>
             </div>
 
             <div className="alternativeContainer">
