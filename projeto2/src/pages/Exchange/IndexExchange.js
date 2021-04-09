@@ -33,8 +33,8 @@ function IndexExchange(){
             document.getElementsByClassName("moedaBase")[0].style.display="none";
             document.getElementsByClassName("moedaValor")[0].style.display="none";
             document.getElementsByClassName("msgError")[0].style.display="flex";
-            document.getElementsByClassName("select")[0].style.color="red";
-            document.getElementsByClassName("select")[1].style.color="red";
+            document.getElementsByClassName("select")[0].style.border="0.5px solid red";
+            document.getElementsByClassName("select")[1].style.border="0.5px solid red";
 
         }
         else if(moedaBase ==="" && moedaCotacao!==""){
@@ -44,20 +44,22 @@ function IndexExchange(){
             document.getElementsByClassName("moedaValor")[0].style.display="none";
             document.getElementsByClassName("msgError")[0].style.display="flex";
             document.getElementsByClassName("select")[1].style.display="flex";
-            document.getElementsByClassName("select")[0].style.color="red";
-            document.getElementsByClassName("select")[1].style.color="black";
+            document.getElementsByClassName("select")[0].style.border="0.5px solid red";
+            document.getElementsByClassName("select")[1].style.border="0.5px solid black";
+
+            
         }
-        else if(moedaCotacao ===""){
-            const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/latest/'+moedaBase);
+        else if(moedaBase!=="" && moedaCotacao ===""){
+            const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
+            moedaBase+'/BRL/'+valor);
             const dadosDaRequesicaoValue = resposta.data;
             setDadosDaRequisicao(dadosDaRequesicaoValue);
             document.getElementsByClassName("moedaBaseCotacao")[0].style.display="none";
             document.getElementsByClassName("msgError")[0].style.display="none";
             document.getElementsByClassName("moedaValor")[0].style.display="none";
             document.getElementsByClassName("moedaBase")[0].style.display="flex";
-            document.getElementsByClassName("select")[0].style.color="black";
-            document.getElementsByClassName("select")[1].style.color="black";
-            
+            document.getElementsByClassName("select")[0].style.border="0.5px solid black";
+            document.getElementsByClassName("select")[1].style.border="0.5px solid black";
         }
         else{
             const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
@@ -68,8 +70,8 @@ function IndexExchange(){
             document.getElementsByClassName("moedaBase")[0].style.display="none";
             document.getElementsByClassName("msgError")[0].style.display="none";
             document.getElementsByClassName("moedaValor")[0].style.display="flex";
-            document.getElementsByClassName("select")[0].style.color="black";
-            document.getElementsByClassName("select")[1].style.color="black";
+            document.getElementsByClassName("select")[0].style.border="0.5px solid black";
+            document.getElementsByClassName("select")[1].style.border="0.5px solid black";
         }
         
     }
@@ -83,12 +85,12 @@ function IndexExchange(){
                     <div className="subDivInformacao">
                         <section className="sectionInformacao"> 
                             <label>Valor</label>
-                            <input type="text" placeholder="R$ 00,00" onChange={handleChangeValor} value={valor} className="inputValor"/>
+                            <input type="money" placeholder="R$ 00,00" onChange={handleChangeValor} value={valor} className="inputValor"/>
                         </section>
                         <section className="sectionInformacao">
                             <label>Cotar de</label>
                             <select onChange={handleChangeMoedaBase} className="select">
-                            <option value="">Selecione uma moeda</option>
+                            <option value="">Selecione uma moeda base</option>
                                 <option value="AED">AED    Emirados Árabes Unidos</option>
                                 <option value="AFN">AFN    Afegão afegão</option>
                                 <option value="ALL">ALL	Lek albanês</option>
@@ -123,7 +125,7 @@ function IndexExchange(){
                         <section className="sectionInformacao">
                             <label>Para</label>
                             <select onChange={handleChangeMoedaCotacao} className="select">
-                                <option value="">Selecione uma moeda</option>
+                                <option value="">Selecione uma moeda cotacao</option>
                                 <option value="AED">AED    Emirados Árabes Unidos</option>
                                 <option value="AFN">AFN    Afegão afegão</option>
                                 <option value="ALL">ALL	Lek albanês</option>
@@ -163,7 +165,7 @@ function IndexExchange(){
                         <h3>Resultado da Cotação</h3>
                     </section>
                     <section  className="sectionResultadoTwo">
-                       <label className="moedaBase">1 {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao['conversion_rates:USD']} BRL</label>
+                       <label className="moedaBase">1 {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao['conversion_rate']} BRL</label>
                        <label className="moedaBaseCotacao">1 {dadosDaRequesicao['base_code']} equivale a  {dadosDaRequesicao['conversion_rate']} {dadosDaRequesicao['target_code']}</label>
                        <label className="moedaValor">{valor} {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao['conversion_result']} {dadosDaRequesicao['target_code']} </label>
                     </section>
