@@ -1,0 +1,86 @@
+.divHeader{
+    display: flex;
+    flex-direction: column;
+    margin: 50px auto;
+}
+.logoazul{
+    height: 55px;
+    width: 100%;
+    margin-bottom: 60px;
+}
+h2{
+    margin: 10px 180px !important;
+    color: #025c75;
+}
+.divInformacao{
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+    margin: 8px auto;
+    padding: 50px;
+    background-color: rgb(248, 248, 248);
+    border: 1px solid #0070ba;
+   
+}
+.subDivInformacao{
+    display: flex;
+    flex-direction: row;
+}
+.sectionInformacao{
+    margin: 5px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonConverte{
+    border-radius: 4px;
+    border: 0.5px solid gray;
+    color:white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #0070ba;
+}
+.buttonConverte:hover{
+    background-color: #0264a5;
+}
+
+.divResultado{
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+    padding: 0px 50px 50px 50px;
+    margin: 10px auto;
+    border: 1px solid #0070ba;
+    background-color: rgb(248, 248, 248);
+
+   
+}
+h3{
+    color: #025c75;
+}
+.sectionResultadoOne{
+    display: flex;
+    flex-direction: row;
+   
+}
+.sectionResultadoTwo{
+    display: flex;
+    flex-direction: column;
+}
+
+.msgError{
+    display: none;
+    color: red;
+}
+.moedaBase{
+    display: none;
+}
+.moedaBaseCotacao{
+    display: none;
+
+}
+.moedaValor{
+    display: none;
+}
+
