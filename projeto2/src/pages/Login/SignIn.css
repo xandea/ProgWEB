@@ -51,6 +51,9 @@
     height: 38px;
     background-color: #0070ba;
 }
+.button:hover{
+    background-color: #0264a5;
+}
 .alternativeContainer{
     display: 100%;
     align-items: center;
