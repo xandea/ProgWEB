@@ -47,9 +47,10 @@ function IndexExchange(){
             document.getElementsByClassName("select")[0].style.color="red";
             document.getElementsByClassName("select")[1].style.color="black";
         }
-        else if(moedaCotacao ===""){
+        else if(moedaBase!=="" && moedaCotacao ===""){
             const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/latest/'+moedaBase);
             const dadosDaRequesicaoValue = resposta.data;
+            console.log(dadosDaRequesicaoValue)
             setDadosDaRequisicao(dadosDaRequesicaoValue);
             document.getElementsByClassName("moedaBaseCotacao")[0].style.display="none";
             document.getElementsByClassName("msgError")[0].style.display="none";
@@ -57,13 +58,13 @@ function IndexExchange(){
             document.getElementsByClassName("moedaBase")[0].style.display="flex";
             document.getElementsByClassName("select")[0].style.color="black";
             document.getElementsByClassName("select")[1].style.color="black";
-            
+
         }
         else{
             const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
                                           moedaBase+'/'+moedaCotacao+'/'+valor);
-            const dadosDaRequesicaoValue = resposta.data;
-            setDadosDaRequisicao(dadosDaRequesicaoValue);
+            const dadosDaRequesicaoValue = resposta.data
+            setDadosDaRequisicao(dadosDaRequesicaoValue); 
             document.getElementsByClassName("moedaBaseCotacao")[0].style.display="none";
             document.getElementsByClassName("moedaBase")[0].style.display="none";
             document.getElementsByClassName("msgError")[0].style.display="none";
@@ -73,7 +74,8 @@ function IndexExchange(){
         }
         
     }
-
+    
+    
         return(
             <div className="divHeader">
                 <img src={LogoAzul} className="logoazul" alt="logo"/>
@@ -163,7 +165,7 @@ function IndexExchange(){
                         <h3>Resultado da Cotação</h3>
                     </section>
                     <section  className="sectionResultadoTwo">
-                       <label className="moedaBase">1 {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao['conversion_rates:USD']} BRL</label>
+                       <label className="moedaBase">1 {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao.conversion_rate} BRL</label>
                        <label className="moedaBaseCotacao">1 {dadosDaRequesicao['base_code']} equivale a  {dadosDaRequesicao['conversion_rate']} {dadosDaRequesicao['target_code']}</label>
                        <label className="moedaValor">{valor} {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao['conversion_result']} {dadosDaRequesicao['target_code']} </label>
                     </section>

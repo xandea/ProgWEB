@@ -1,6 +1,6 @@
 import React from "react";
 import './HomePageStyle.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory} from 'react-router-dom';
 import Banner from './../../Images/banner.png';
 import LogoBranca from './../../Images/logotipo.svg';
 import Seta from './../../Images/seta.png';
@@ -14,6 +14,20 @@ import BradescoIcon from './../../Images/bradesco-icon.png';
 
 
 function HomePage() {
+    const history = useHistory();
+
+    const realizarCotação = (e) => {
+        const usuario = localStorage.getItem('@login/email')
+        if(usuario!==null){
+            history.push("/exchange")   
+        }else{
+            history.push("/SignIn")  
+        }
+        //const emailValeu = e.target.value
+        //setEmail(emailValeu)
+        console.log(usuario)
+    }
+
     return(
         <body>
             <section className="background-container">
@@ -102,8 +116,8 @@ function HomePage() {
                             ou fora do seu país.
                         </span>
                     </p>
-                    <button className="button-footer">
-                        <a href="/#" className="button-footer">Paypal para Empresas</a>
+                    <button onClick={realizarCotação} className="button-footer">
+                        <spam className="button-footer">Realizar Cotação</spam>
                     </button>
                 </section>
             </footer>

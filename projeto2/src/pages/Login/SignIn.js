@@ -1,7 +1,7 @@
 //import { render } from '@testing-library/react';
 import React, {/*Component,*/ /*useEffect,*/ useState } from 'react';
 import axios from 'axios';
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import LogoAzul from './../../Images/logoLogin.svg';
 import './SignIn.css';
 
@@ -90,7 +90,9 @@ function Example() {
                 <button className="button" >Cadastrar-se</button>
             </div>
             
-            <Link to="/exchange">Ir para a página exchange</Link>
+            <div>
+                <spam>(DICA) email: eve.holt@reqres.in senha: cityslicka </spam>
+            </div>
         </div>
     </body>
         
