@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import './HomePageStyle.css';
 import { Link, useHistory} from 'react-router-dom';
 import Banner from './../../Images/banner.png';
@@ -15,11 +15,13 @@ import BradescoIcon from './../../Images/bradesco-icon.png';
 
 function HomePage() {
     const history = useHistory();
+    const [usuario, setUsuario] = useState(null)
 
     const realizarCotação = (e) => {
-        const usuario = localStorage.getItem('@login/email')
+        //setUsuario(localStorage.getItem('@login/email'))
         if(usuario!==null){
-            history.push("/exchange")   
+            setUsuario(localStorage.getItem('@login/email'))
+            history.push("/exchange")
         }else{
             history.push("/SignIn")  
         }
@@ -27,6 +29,19 @@ function HomePage() {
         //setEmail(emailValeu)
         console.log(usuario)
     }
+    useEffect(() => {
+        setUsuario(localStorage.getItem('@login/email'))
+        //console.log(usuario)
+
+        if(usuario!==null){
+            console.log("entrei")
+            document.getElementsByClassName("button-entrar")[0].style.display="none"
+            document.getElementsByClassName("button-criar")[0].innerHTML="Bem Vindo: "+usuario
+        }else{
+            document.getElementsByClassName("button-entrar")[0].style.display="flex"
+        }
+        
+      }, [usuario]);
 
     return(
         <body>
