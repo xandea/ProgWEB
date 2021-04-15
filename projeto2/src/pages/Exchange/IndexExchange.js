@@ -17,7 +17,7 @@ function IndexExchange(){
     const dia = data.getUTCDate();
     const mes = data.getUTCMonth()+1;
     const ano = data.getFullYear();
-    const horario = data.getUTCHours();
+    const horario = data.getHours();
     const minuto = data.getUTCMinutes();
     
     
@@ -91,7 +91,6 @@ function IndexExchange(){
     
     const deslogar = (e) =>{
         localStorage.removeItem('@login/email');
-        localStorage.clear();
     }
     
         return(
@@ -106,7 +105,9 @@ function IndexExchange(){
                     </div>
                     <img src={LogoAzul} className="logoazul" alt="logo"/>
                 </div>
-                <h2 className="tagh2">Cotação de Moedas</h2>
+                <section className="textCotacao">
+                    <h2 className="tagh2">Cotação de Moedas</h2>
+                </section>
                 <div className="divInformacao">
                     <span className="msgError">{msgError}</span>
                     <div className="subDivInformacao">

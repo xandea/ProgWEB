@@ -68,7 +68,7 @@ function Example() {
                 />
                 <input
                 className="input"  
-                type="text" 
+                type="password" 
                 name="senha"
                 placeholder="senha"
                 onChange={onChangePassword}

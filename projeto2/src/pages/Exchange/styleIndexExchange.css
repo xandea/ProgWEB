@@ -52,8 +52,11 @@
 .menuDropdown:hover .btnDropdown {
     background-color: #0264a5;
 }
-.tagh2{
+.textCotacao{
+    display: flex;
     margin: 10px 180px !important;
+}
+.tagh2{
     color: #025c75;
 }
 .divInformacao{
@@ -142,5 +145,14 @@
 }
 .moedaValor{
     display: none;
+}
+
+/* responsividade para @media notebook alexandre*/
+@media only screen and (max-width: 1200px) {
+    .divHeader{
+        display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 }
 
