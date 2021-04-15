@@ -1,15 +1,25 @@
 import React, {useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './styleIndexExchange.css';
 import LogoAzul from './../../Images/logoLogin.svg';
+
+
 function IndexExchange(){
-    
 
     const [moedaBase, setMoedaBase] = useState("");
     const [moedaCotacao, setMoedaCotacao] = useState("");
     const [valor, setValor] = useState("1");
     const [dadosDaRequesicao, setDadosDaRequisicao] = useState("");
     const [msgError,setMsgError] = useState("")
+
+    const data = new Date();
+    const dia = data.getUTCDate();
+    const mes = data.getUTCMonth()+1;
+    const ano = data.getFullYear();
+    const horario = data.getUTCHours();
+    const minuto = data.getUTCMinutes();
+    
     
     const handleChangeMoedaBase =(e)=>{
         const moedaBaseValue = e.target.value;
@@ -28,7 +38,7 @@ function IndexExchange(){
 
     const converterMethod = async ()=>{
         if(moedaBase === "" && moedaCotacao ===""){
-            setMsgError("Erro: É necessário selecionar uma moeda");
+            setMsgError("Erro: É necessário selecionar uma moeda base");
             document.getElementsByClassName("moedaBaseCotacao")[0].style.display="none";
             document.getElementsByClassName("moedaBase")[0].style.display="none";
             document.getElementsByClassName("moedaValor")[0].style.display="none";
@@ -60,6 +70,7 @@ function IndexExchange(){
             document.getElementsByClassName("moedaBase")[0].style.display="flex";
             document.getElementsByClassName("select")[0].style.border="0.5px solid black";
             document.getElementsByClassName("select")[1].style.border="0.5px solid black";
+            document.getElementsByClassName("sectionData")[0].style.display="flex";
         }
         else{
             const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
@@ -72,25 +83,40 @@ function IndexExchange(){
             document.getElementsByClassName("moedaValor")[0].style.display="flex";
             document.getElementsByClassName("select")[0].style.border="0.5px solid black";
             document.getElementsByClassName("select")[1].style.border="0.5px solid black";
+            document.getElementsByClassName("sectionData")[0].style.display="flex";
         }
         
     }
 
+    const deslogar= (e) =>{
+        localStorage.removeItem('@login/email');
+        localStorage.clear();
+    }
+
         return(
             <div className="divHeader">
-                <img src={LogoAzul} className="logoazul" alt="logo"/>
-                <h2>Cotação de Moedas</h2>
+                <div className="subDivHeader">
+                    <div className="menuDropdown">
+                        <button className="btnDropdown">Menu</button>
+                        <div className="sectionLinks">
+                            <Link to="/">Pagina Inicial</Link>
+                            <Link to="/" onClick={deslogar}>Logout</Link>
+                        </div>
+                    </div>
+                    <img src={LogoAzul} className="logoazul" alt="logo"/>
+                </div>
+                <h2 className="tagh2">Cotação de Moedas</h2>
                 <div className="divInformacao">
                     <span className="msgError">{msgError}</span>
                     <div className="subDivInformacao">
                         <section className="sectionInformacao"> 
-                            <label>Valor</label>
+                            <label className="labelInformacao">Valor</label>
                             <input type="money" placeholder="R$ 00,00" onChange={handleChangeValor} value={valor} className="inputValor"/>
                         </section>
                         <section className="sectionInformacao">
-                            <label>Cotar de</label>
+                            <label className="labelInformacao">Cotar de</label>
                             <select onChange={handleChangeMoedaBase} className="select">
-                            <option value="">Selecione uma moeda base</option>
+                                <option value="">Selecione uma moeda base</option>
                                 <option value="AED">AED    Emirados Árabes Unidos</option>
                                 <option value="AFN">AFN    Afegão afegão</option>
                                 <option value="ALL">ALL	Lek albanês</option>
@@ -123,7 +149,7 @@ function IndexExchange(){
                             </select>
                         </section>
                         <section className="sectionInformacao">
-                            <label>Para</label>
+                            <label className="labelInformacao">Para</label>
                             <select onChange={handleChangeMoedaCotacao} className="select">
                                 <option value="">Selecione uma moeda cotacao</option>
                                 <option value="AED">AED    Emirados Árabes Unidos</option>
@@ -162,8 +188,13 @@ function IndexExchange(){
                 </div>
                 <div className="divResultado">
                     <section className="sectionResultadoOne">
-                        <h3>Resultado da Cotação</h3>
+                        <h3 className="tagh3">Resultado da Cotação</h3>
+                        <section className="sectionData">
+                            <label className="labelData">Data da Cotação:  <span className="spanData">{dia}/{mes}/{ano}</span></label>
+                            <label className="labelData">Horário da Cotação: <span className="spanData">{horario}:{minuto}</span></label>
+                        </section>
                     </section>
+                    
                     <section  className="sectionResultadoTwo">
                        <label className="moedaBase">1 {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao['conversion_rate']} BRL</label>
                        <label className="moedaBaseCotacao">1 {dadosDaRequesicao['base_code']} equivale a  {dadosDaRequesicao['conversion_rate']} {dadosDaRequesicao['target_code']}</label>

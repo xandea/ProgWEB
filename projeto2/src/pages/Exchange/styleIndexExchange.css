@@ -3,12 +3,56 @@
     flex-direction: column;
     margin: 50px auto;
 }
+.subDivHeader{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 70px;
+}
 .logoazul{
     height: 55px;
-    width: 100%;
-    margin-bottom: 60px;
+    width: 50%;
 }
-h2{
+.menuDropdown {
+    margin-left: 177px;
+    position: relative;
+    display: inline-block;
+}
+.btnDropdown {
+    width: 160px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 0.5px solid gray;
+    color:white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #0070ba;
+    cursor: pointer;
+}  
+.sectionLinks {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.sectionLinks a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.sectionLinks a:hover {
+     background-color: #f1f1f1
+}
+.menuDropdown:hover .sectionLinks {
+    display: block;
+}
+.menuDropdown:hover .btnDropdown {
+    background-color: #0264a5;
+}
+.tagh2{
     margin: 10px 180px !important;
     color: #025c75;
 }
@@ -31,7 +75,8 @@ h2{
     display: flex;
     flex-direction: column;
 }
-
+.labelInformacao{
+}
 .buttonConverte{
     border-radius: 4px;
     border: 0.5px solid gray;
@@ -53,17 +98,32 @@ h2{
     margin: 10px auto;
     border: 1px solid #0070ba;
     background-color: rgb(248, 248, 248);
-
-   
 }
-h3{
+.tagh3{
     color: #025c75;
 }
 .sectionResultadoOne{
     display: flex;
     flex-direction: row;
-   
 }
+.sectionData{
+    display: flex;
+    flex-direction: column;
+    margin-left: 500px;
+    margin-top: 17px;
+    font-weight: bold;
+    color: #025c75;
+    display: none;
+}
+.labelData{
+    display: flex;
+    flex-direction: row;
+}
+.spanData{
+    font-weight: normal;
+    margin-left: 7px;
+}
+
 .sectionResultadoTwo{
     display: flex;
     flex-direction: column;
