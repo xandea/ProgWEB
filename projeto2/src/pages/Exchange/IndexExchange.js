@@ -63,6 +63,7 @@ function IndexExchange(){
             const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
             moedaBase+'/BRL/'+valor);
             const dadosDaRequesicaoValue = resposta.data;
+            console.log(dadosDaRequesicaoValue)
             setDadosDaRequisicao(dadosDaRequesicaoValue);
             document.getElementsByClassName("moedaBaseCotacao")[0].style.display="none";
             document.getElementsByClassName("msgError")[0].style.display="none";
@@ -75,8 +76,8 @@ function IndexExchange(){
         else{
             const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
                                           moedaBase+'/'+moedaCotacao+'/'+valor);
-            const dadosDaRequesicaoValue = resposta.data;
-            setDadosDaRequisicao(dadosDaRequesicaoValue);
+            const dadosDaRequesicaoValue = resposta.data
+            setDadosDaRequisicao(dadosDaRequesicaoValue); 
             document.getElementsByClassName("moedaBaseCotacao")[0].style.display="none";
             document.getElementsByClassName("moedaBase")[0].style.display="none";
             document.getElementsByClassName("msgError")[0].style.display="none";
@@ -87,12 +88,12 @@ function IndexExchange(){
         }
         
     }
-
-    const deslogar= (e) =>{
+    
+    const deslogar = (e) =>{
         localStorage.removeItem('@login/email');
         localStorage.clear();
     }
-
+    
         return(
             <div className="divHeader">
                 <div className="subDivHeader">
