@@ -103,7 +103,9 @@ function IndexExchange(){
                             <Link to="/" onClick={deslogar}>Logout</Link>
                         </div>
                     </div>
-                    <img src={LogoAzul} className="logoazul" alt="logo"/>
+                    <div className="divImgLogoAzul">
+                        <img src={LogoAzul} className="logoazul" alt="logo"/>
+                    </div>
                 </div>
                 <section className="textCotacao">
                     <h2 className="tagh2">Cotação de Moedas</h2>

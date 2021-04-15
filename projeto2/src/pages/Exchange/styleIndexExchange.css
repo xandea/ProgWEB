@@ -1,21 +1,27 @@
 .divHeader{
     display: flex;
+    width: 1050px;
     flex-direction: column;
     margin: 50px auto;
 }
 .subDivHeader{
     display: flex;
     flex-direction: row;
+    width: 100%;
     margin-bottom: 70px;
 }
-.logoazul{
-    height: 55px;
+.divImgLogoAzul{
+    display: flex;
     width: 50%;
 }
+.logoazul{
+    display: flex;
+    height: 55px;
+}
 .menuDropdown {
-    margin-left: 177px;
-    position: relative;
     display: inline-block;
+    position: relative;
+    width: 50%;
 }
 .btnDropdown {
     width: 160px;
@@ -54,7 +60,8 @@
 }
 .textCotacao{
     display: flex;
-    margin: 10px 180px !important;
+    justify-content: flex-start;
+    width: 100%;
 }
 .tagh2{
     color: #025c75;
@@ -62,9 +69,9 @@
 .divInformacao{
     display: flex;
     flex-direction: column;
-    width: 900px;
-    margin: 8px auto;
-    padding: 50px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
     background-color: rgb(248, 248, 248);
     border: 1px solid #0070ba;
    
@@ -72,16 +79,17 @@
 .subDivInformacao{
     display: flex;
     flex-direction: row;
+    padding-bottom: 50px;
+    align-items: center;
 }
 .sectionInformacao{
-    margin: 5px auto;
+    margin: 20px 35px;
     display: flex;
     flex-direction: column;
 }
-.labelInformacao{
-}
 .buttonConverte{
     border-radius: 4px;
+    padding: 15px;
     border: 0.5px solid gray;
     color:white;
     font-family: Arial, Helvetica, sans-serif;
@@ -96,9 +104,8 @@
 .divResultado{
     display: flex;
     flex-direction: column;
-    width: 900px;
-    padding: 0px 50px 50px 50px;
-    margin: 10px auto;
+    width: 100%;
+    margin-top: 10px;
     border: 1px solid #0070ba;
     background-color: rgb(248, 248, 248);
 }
@@ -108,12 +115,13 @@
 .sectionResultadoOne{
     display: flex;
     flex-direction: row;
+    margin-left: 65px;
 }
 .sectionData{
     display: flex;
     flex-direction: column;
-    margin-left: 500px;
-    margin-top: 17px;
+    margin-left: 550px;
+    margin-top: 22px;
     font-weight: bold;
     color: #025c75;
     display: none;
@@ -130,6 +138,8 @@
 .sectionResultadoTwo{
     display: flex;
     flex-direction: column;
+    margin-left: 65px;
+    padding-bottom: 50px;
 }
 
 .msgError{
@@ -153,6 +163,46 @@
         display: flex;
         max-width: 1200px;
         margin: 0 auto;
+    }
+}
+/* responsividade para mobile */
+@media only screen and (max-width: 600px){
+    .divHeader{
+        display: flex;
+        max-width: 600px;
+        margin: 20px auto;
+    }
+    .subDivHeader{
+        margin-left: 10px;
+        margin-bottom: 50px;
+    }
+    .divImgLogoAzul{
+        width: 100%;
+    }
+    .textCotacao{
+        margin-left: 10px;
+    }
+    .divInformacao{
+        width: 80%;
+    }
+    .subDivInformacao{
+        flex-direction: column;
+    }
+    .sectionInformacao{
+        justify-content: center;
+        align-items: center;
+    }
+    .divResultado{
+        width: 80%;
+    }
+    .sectionResultadoOne{
+        margin-left: 20px;
+    }
+    .sectionData{
+        margin-left: 40px;
+    }
+    .sectionResultadoTwo{
+        margin-left: 20px;
     }
 }
 
