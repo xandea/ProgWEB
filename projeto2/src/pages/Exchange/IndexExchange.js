@@ -106,7 +106,7 @@ function IndexExchange(){
 
     useEffect(() => {
         VerificaUsuarioLogado();
-      }, []);
+      }, );
     
         return(
             <div className="divHeader">
