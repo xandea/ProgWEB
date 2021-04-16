@@ -1,5 +1,5 @@
-import React, {useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import { Link,  useHistory} from 'react-router-dom';
 import axios from 'axios';
 import './styleIndexExchange.css';
 import LogoAzul from './../../Images/logoLogin.svg';
@@ -11,11 +11,13 @@ function IndexExchange(){
     const [moedaCotacao, setMoedaCotacao] = useState("");
     const [valor, setValor] = useState("1");
     const [dadosDaRequesicao, setDadosDaRequisicao] = useState("");
-    const [msgError,setMsgError] = useState("")
+    const [msgError,setMsgError] = useState("");
+
+    const history = useHistory();
 
     const data = new Date();
-    const dia = data.getUTCDate();
-    const mes = data.getUTCMonth()+1;
+    const dia = data.getDate();
+    const mes = data.getMonth()+1;
     const ano = data.getFullYear();
     const horario = data.getHours();
     const minuto = data.getUTCMinutes();
@@ -92,6 +94,19 @@ function IndexExchange(){
     const deslogar = (e) =>{
         localStorage.removeItem('@login/email');
     }
+
+    function VerificaUsuarioLogado(){
+       
+        const usuario = localStorage.getItem('@login/email');
+        console.log(usuario);
+        if(usuario === null){
+            history.push('SignIn');
+        }
+    }
+
+    useEffect(() => {
+        VerificaUsuarioLogado();
+      }, []);
     
         return(
             <div className="divHeader">
