@@ -27,7 +27,7 @@ function HomePage() {
         }
         //const emailValeu = e.target.value
         //setEmail(emailValeu)
-        console.log(usuario)
+        //console.log(usuario)
     }
     useEffect(() => {
         setUsuario(localStorage.getItem('@login/email'))

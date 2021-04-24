@@ -24,16 +24,17 @@ function Example() {
     }
 
     async function validationLogin() {
-        
-        if (email!=="" && password!==""){
+        const emailRegex = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+(.[a-z]+)?$/i
+        //console.log(emailRegex.test(email))
+        if (password!=="" && emailRegex.test(email)){
             try {           
                 const response = await axios.post('https://reqres.in/api/login',{
                 email: email,//"eve.holt@reqres.in",
                 password: password//"cityslicka"
                 })
-                console.log(email)
-                console.log(password)
-                console.log(response.status)
+                //console.log(email)
+                //console.log(password)
+                //console.log(response.status)
                 //setStatus(response.status)
                 localStorage.setItem('@login/email', email)
                 //window.location.reload();
@@ -48,7 +49,7 @@ function Example() {
                 }
             }
         }else{
-            setMsgErro("Campos vazios(1 ou +)")
+            setMsgErro("Usuario incorreto")
             //setStatus("vazio")
             document.getElementsByClassName("erroContainer")[0].style.display="flex"
         }
