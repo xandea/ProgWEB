@@ -157,6 +157,8 @@
     display: none;
 }
 
+
+
 /* responsividade para @media notebook alexandre*/
 @media only screen and (max-width: 1200px) {
     .divHeader{
