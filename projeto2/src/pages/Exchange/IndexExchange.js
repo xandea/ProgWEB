@@ -38,6 +38,35 @@ function IndexExchange(){
         setValor(valorValue);
     }
 
+    function messagemDeErro(){
+        if(moedaBase === "" && moedaCotacao ===""){
+            return(
+                <span className="msgError" style={{display:"flex"}}>Erro: É necessário selecionar uma moeda base</span>
+                /*<div>
+                    <span className="msgError">Erro: É necessário selecionar uma moeda base</span>
+                    <label className="moedaBase" style={{display: "none"}}/>
+                    <label className="moedaBaseCotacao" style={{display:"none"}}/>
+                    <label className="moedaValor" style={{display:"none"}}/>
+                    <select onChange={props.handleChangeMoedaBase} className="selectOne" style={{border:"0.5px solid red"}}/>
+                    <select onChange={props.handleChangeMoedaBase} className="selectTwo" style={{border:"0.5px solid red"}}/>
+                </div>*/
+            );
+        }
+        if(moedaBase ==="" && moedaCotacao!==""){
+            return(
+                <span className="msgError" style={{display:"flex"}}>Erro: É necessário selecionar uma moeda base ao invés de cotação</span>
+                /*<div>
+                    <span className="msgError">Erro: É necessário selecionar uma moeda base ao inves de cotacao</span>
+                    <label className="moedaBase" style={{display:"none"}}/>
+                    <label className="moedaBaseCotacao" style={{display:"none"}}/>
+                    <label className="moedaValor" style={{display:"none"}}/>
+                    <select onChange={props.handleChangeMoedaBase} className="selectOne" style={{border:"0.5px solid red"}}/>
+                    <select onChange={props.handleChangeMoedaBase} className="selectTwo" style={{border:"0.5px solid black"}}/>
+                </div>*/
+            );
+        }
+    }
+
     const converterMethod = async ()=>{
         if(moedaBase === "" && moedaCotacao ===""){
             setMsgError("Erro: É necessário selecionar uma moeda base");
@@ -47,10 +76,10 @@ function IndexExchange(){
             document.getElementsByClassName("msgError")[0].style.display="flex";
             document.getElementsByClassName("select")[0].style.border="0.5px solid red";
             document.getElementsByClassName("select")[1].style.border="0.5px solid red";
-
+            
         }
         else if(moedaBase ==="" && moedaCotacao!==""){
-            setMsgError("Erro: É necessário selecionar uma moeda base ao inves de cotacao");
+            setMsgError("Erro: É necessário selecionar uma moeda base ao invés de cotação");
             document.getElementsByClassName("moedaBaseCotacao")[0].style.display="none";
             document.getElementsByClassName("moedaBase")[0].style.display="none";
             document.getElementsByClassName("moedaValor")[0].style.display="none";
@@ -61,11 +90,10 @@ function IndexExchange(){
 
             
         }
-        else if(moedaBase!=="" && moedaCotacao ===""){
+        if(moedaBase!=="" && moedaCotacao ===""){
             const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
             moedaBase+'/BRL/'+valor);
             const dadosDaRequesicaoValue = resposta.data;
-            console.log(dadosDaRequesicaoValue)
             setDadosDaRequisicao(dadosDaRequesicaoValue);
             document.getElementsByClassName("moedaBaseCotacao")[0].style.display="none";
             document.getElementsByClassName("msgError")[0].style.display="none";
@@ -78,7 +106,7 @@ function IndexExchange(){
         else{
             const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
                                           moedaBase+'/'+moedaCotacao+'/'+valor);
-            const dadosDaRequesicaoValue = resposta.data
+            const dadosDaRequesicaoValue = resposta.data;
             setDadosDaRequisicao(dadosDaRequesicaoValue); 
             document.getElementsByClassName("moedaBaseCotacao")[0].style.display="none";
             document.getElementsByClassName("moedaBase")[0].style.display="none";
@@ -96,7 +124,6 @@ function IndexExchange(){
     }
 
     function VerificaUsuarioLogado(){
-       
         const usuario = localStorage.getItem('@login/email');
         console.log(usuario);
         if(usuario === null){
@@ -126,7 +153,7 @@ function IndexExchange(){
                     <h2 className="tagh2">Cotação de Moedas</h2>
                 </section>
                 <div className="divInformacao">
-                    <span className="msgError">{msgError}</span>
+                    <span className="msgError">{msgError}{messagemDeErro}</span>
                     <div className="subDivInformacao">
                         <section className="sectionInformacao"> 
                             <label className="labelInformacao">Valor</label>
@@ -219,7 +246,6 @@ function IndexExchange(){
                        <label className="moedaBaseCotacao">1 {dadosDaRequesicao['base_code']} equivale a  {dadosDaRequesicao['conversion_rate']} {dadosDaRequesicao['target_code']}</label>
                        <label className="moedaValor">{valor} {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao['conversion_result']} {dadosDaRequesicao['target_code']} </label>
                     </section>
-                    
                 </div>
             </div>
         );
