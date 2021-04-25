@@ -43,17 +43,22 @@ function Example() {
                      
             } catch (error) {               
                 if(error.response.status===400){
-                    //setStatus("400")
                     setMsgErro("Usuario não cadastrado")
-                    document.getElementsByClassName("erroContainer")[0].style.display="flex"
+                     //setStatus("400")
+                    //document.getElementsByClassName("erroContainer")[0].style.display="flex"
                 }
             }
         }else{
-            setMsgErro("Usuario incorreto")
+            setMsgErro("Usuario Incorreto")
             //setStatus("vazio")
-            document.getElementsByClassName("erroContainer")[0].style.display="flex"
+            //document.getElementsByClassName("erroContainer")[0].style.display="flex"
+            //mensagemErro()
         }
     }
+
+   
+
+    
   
     return(
     <body className="bodySingIn">
@@ -79,9 +84,8 @@ function Example() {
             <div className="containerButton">
                 <button className="button" onClick={validationLogin}>Avançar</button>
             </div>
-            <div className="erroContainer">
-                <span>Erro:{msgErro}</span>
-            </div>
+
+            {msgErro !== ""? <div className="erroContainerAparecer">{msgErro}</div> : "" }
 
             <div className="alternativeContainer">
                 <span className="alternative">ou</span>       
