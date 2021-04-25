@@ -58,16 +58,6 @@
     display: 100%;
     align-items: center;
 }
-.alternative{
-   
-}
-.erroContainer{
-    display: none;
-    width: 100%;
-    justify-content: center;
-    background-color: red;
-    color: black;
-}
 
 .erroContainerAparecer{
     display: flex;
