@@ -12,7 +12,7 @@ function Example() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [msgErro,setMsgErro] = useState("")
-    //const [status,setStatus] = useState("")
+    
 
     const onChangeEmail = (e) => {
         const emailValeu = e.target.value
@@ -25,34 +25,27 @@ function Example() {
 
     async function validationLogin() {
         const emailRegex = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+(.[a-z]+)?$/i
-        //console.log(emailRegex.test(email))
+        
         if (password!=="" && emailRegex.test(email)){
             try {           
                 await axios.post('https://reqres.in/api/login',{
                 email: email,//"eve.holt@reqres.in",
                 password: password//"cityslicka"
                 })
-                //console.log(email)
-                //console.log(password)
-                //console.log(response.status)
-                //setStatus(response.status)
+               
                 localStorage.setItem('@login/email', email)
-                //window.location.reload();
                 history.push("/exchange")   
                 
                      
             } catch (error) {               
                 if(error.response.status===400){
                     setMsgErro("Usuario não cadastrado")
-                     //setStatus("400")
-                    //document.getElementsByClassName("erroContainer")[0].style.display="flex"
+                
                 }
             }
         }else{
             setMsgErro("Usuario Incorreto")
-            //setStatus("vazio")
-            //document.getElementsByClassName("erroContainer")[0].style.display="flex"
-            //mensagemErro()
+           
         }
     }
 
