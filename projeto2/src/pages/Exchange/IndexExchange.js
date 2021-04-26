@@ -12,6 +12,8 @@ function IndexExchange(){
     const [valor, setValor] = useState("1");
     const [dadosDaRequesicao, setDadosDaRequisicao] = useState("");
     const [msgError,setMsgError] = useState("");
+    const [mudaEstiloOne,setMudaEstiloOne] = useState();
+    const [mudaEstiloTwo,setMudaEstiloTwo] = useState();
 
     const history = useHistory();
 
@@ -38,32 +40,38 @@ function IndexExchange(){
         setValor(valorValue);
     }
 
+    
+
     const converterMethod = async ()=>{
         if(moedaBase === "" && moedaCotacao ===""){
             setMsgError("Erro: É necessário selecionar uma moeda base");
-            document.getElementsByClassName("select")[0].style.display="none";
-            document.getElementsByClassName("select")[1].style.display="none";
+            setMudaEstiloOne({border:"0.5px solid red"});
+            setMudaEstiloTwo({border:"0.5px solid red"});
+           
         }
         else if(moedaBase ==="" && moedaCotacao!==""){
             setMsgError("Erro: É necessário selecionar uma moeda base ao invés de cotação");
-            document.getElementsByClassName("select")[0].style.display="none";
-            document.getElementsByClassName("select")[1].style.display="none";
+            setMudaEstiloOne({border:"0.5px solid red"});
+            setMudaEstiloTwo({border:"0.5px solid black"});
         }
-        if(moedaBase!=="" && moedaCotacao ===""){
-           /* const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
-            moedaBase+'/BRL/'+valor);*/
+        else if(moedaBase!=="" && moedaCotacao ===""){
             const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
-            'USD'+'/BRL/'+'3');
+            moedaBase+'/BRL/'+valor);
             const dadosDaRequesicaoValue = resposta.data;
             setDadosDaRequisicao(dadosDaRequesicaoValue);
+            setMsgError("MoedaBaseSelecionado");
+            setMudaEstiloOne({border:"0.5px solid black"});
+            setMudaEstiloTwo({border:"0.5px solid black"});
         }
         else{
-            /*const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
-                                          moedaBase+'/'+moedaCotacao+'/'+valor);*/
             const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
-                                          'USD'+'/'+'BRL'+'/'+'5');
+                                          moedaBase+'/'+moedaCotacao+'/'+valor);
             const dadosDaRequesicaoValue = resposta.data;
             setDadosDaRequisicao(dadosDaRequesicaoValue); 
+            setMsgError("MoedaBaseCotacaoSelecionado");
+            setMudaEstiloOne({border:"0.5px solid black"});
+            setMudaEstiloTwo({border:"0.5px solid black"});
+          
         }
         
     }
@@ -102,7 +110,7 @@ function IndexExchange(){
                     <h2 className="tagh2">Cotação de Moedas</h2>
                 </section>
                 <div className="divInformacao">
-                    {msgError !== ""? <span className="msgError" style={{display:"flex"}}>{msgError}</span> : "" }
+                    {msgError !== "MoedaBaseSelecionado" && msgError !== "MoedaBaseCotacaoSelecionado"  ? <span className="msgError" style={{display:"flex"}}>{msgError}</span> : "" }
                     <div className="subDivInformacao">
                         <section className="sectionInformacao"> 
                             <label className="labelInformacao">Valor</label>
@@ -110,41 +118,8 @@ function IndexExchange(){
                         </section>
                         <section className="sectionInformacao">
                             <label className="labelInformacao">Cotar de</label>
-                            <select onChange={handleChangeMoedaBase} className="select">
-                                <option value="">Selecione uma moeda base</option>
-                                <option value="AED">AED Emirados Árabes Unidos</option>
-                                <option value="AFN">AFN Afegão afegão</option>
-                                <option value="ALL">ALL	Lek albanês</option>
-                                <option value="AMD">AMD	Dram armênio</option>
-                                <option value="ANG">ANG	Florim das Antilhas Holandesas</option>
-                                <option value="AOA">AOA	Kwanza angolano</option>
-                                <option value="ARS">ARS	Peso argentino</option>
-                                <option value="AUD">AUD	Dólar australiano</option>
-                                <option value="BOB">BOB	Boliviano</option>
-                                <option value="BRL">BRL	real brasileiro</option>
-                                <option value="BSD">BSD	Dólar das Bahamas</option>
-                                <option value="CAD">CAD Dólar canadense</option>
-                                <option value="CHF">CHF	Franco suíço</option>
-                                <option value="CLP">CLP	Peso Chileno</option>
-                                <option value="CNY">CNY	Renminbi Chinês</option>
-                                <option value="COP">COP	Peso colombiano</option>
-                                <option value="CUC">CUC	Peso cubano</option>
-                                <option value="EGP">EGP	Libra egípcia</option>
-                                <option value="EUR">EUR	Euro</option>
-                                <option value="GBP">GBP	Libra esterlina</option>
-                                <option value="HKD">HKD	Dólar de Hong Kong</option>
-                                <option value="JPY">JPY	Yen japonês</option>
-                                <option value="MXN">MXN	Peso mexicano</option>
-                                <option value="NOK">NOK	Coroa norueguesa</option>
-                                <option value="NZD">NZD	Dólar neozelandês</option>
-                                <option value="PYG">PYG	Guaraní Paraguaio</option>
-                                <option value="SEK">SEK	Coroa sueca</option>
-                                <option value="USD">USD	Dólar Americano</option>
-                                <option value="UYU">UYU	Peso Uruguaio</option>
-                            </select>
-                            {msgError === "Erro: É necessário selecionar uma moeda base"? 
-                                <select onChange={handleChangeMoedaBase} style={{border:"0.5px solid red"}}> 
-                                    <option value="">Selecione uma moeda cotacao</option>
+                                <select onChange={handleChangeMoedaBase} className="select" style={mudaEstiloOne}>
+                                    <option value="">Selecione uma moeda base</option>
                                     <option value="AED">AED Emirados Árabes Unidos</option>
                                     <option value="AFN">AFN Afegão afegão</option>
                                     <option value="ALL">ALL	Lek albanês</option>
@@ -174,44 +149,11 @@ function IndexExchange(){
                                     <option value="SEK">SEK	Coroa sueca</option>
                                     <option value="USD">USD	Dólar Americano</option>
                                     <option value="UYU">UYU	Peso Uruguaio</option>
-                                </select>: "" }
-                                {msgError === "Erro: É necessário selecionar uma moeda base ao invés de cotação"? 
-                                <select onChange={handleChangeMoedaBase} style={{border:"0.5px solid red"}}> 
-                                    <option value="">Selecione uma moeda cotacao</option>
-                                    <option value="AED">AED Emirados Árabes Unidos</option>
-                                    <option value="AFN">AFN Afegão afegão</option>
-                                    <option value="ALL">ALL	Lek albanês</option>
-                                    <option value="AMD">AMD	Dram armênio</option>
-                                    <option value="ANG">ANG	Florim das Antilhas Holandesas</option>
-                                    <option value="AOA">AOA	Kwanza angolano</option>
-                                    <option value="ARS">ARS	Peso argentino</option>
-                                    <option value="AUD">AUD	Dólar australiano</option>
-                                    <option value="BOB">BOB	Boliviano</option>
-                                    <option value="BRL">BRL	real brasileiro</option>
-                                    <option value="BSD">BSD	Dólar das Bahamas</option>
-                                    <option value="CAD">CAD Dólar canadense</option>
-                                    <option value="CHF">CHF	Franco suíço</option>
-                                    <option value="CLP">CLP	Peso Chileno</option>
-                                    <option value="CNY">CNY	Renminbi Chinês</option>
-                                    <option value="COP">COP	Peso colombiano</option>
-                                    <option value="CUC">CUC	Peso cubano</option>
-                                    <option value="EGP">EGP	Libra egípcia</option>
-                                    <option value="EUR">EUR	Euro</option>
-                                    <option value="GBP">GBP	Libra esterlina</option>
-                                    <option value="HKD">HKD	Dólar de Hong Kong</option>
-                                    <option value="JPY">JPY	Yen japonês</option>
-                                    <option value="MXN">MXN	Peso mexicano</option>
-                                    <option value="NOK">NOK	Coroa norueguesa</option>
-                                    <option value="NZD">NZD	Dólar neozelandês</option>
-                                    <option value="PYG">PYG	Guaraní Paraguaio</option>
-                                    <option value="SEK">SEK	Coroa sueca</option>
-                                    <option value="USD">USD	Dólar Americano</option>
-                                    <option value="UYU">UYU	Peso Uruguaio</option>
-                                </select>: "" }
+                                </select>
                         </section>
                         <section className="sectionInformacao">
                             <label className="labelInformacao">Para</label>
-                                <select onChange={handleChangeMoedaCotacao} className="select"> 
+                                <select onChange={handleChangeMoedaCotacao} className="select" style={mudaEstiloTwo}> 
                                     <option value="">Selecione uma moeda cotacao</option>
                                     <option value="AED">AED  Emirados Árabes Unidos</option>
                                     <option value="AFN">AFN  Afegão afegão</option>
@@ -243,88 +185,27 @@ function IndexExchange(){
                                     <option value="USD">USD	Dólar Americano</option>
                                     <option value="UYU">UYU	Peso Uruguaio</option>
                                 </select>
-                            {msgError === "Erro: É necessário selecionar uma moeda base"? 
-                                <select onChange={handleChangeMoedaCotacao} style={{border:"0.5px solid red"}}> 
-                                    <option value="">Selecione uma moeda cotacao</option>
-                                    <option value="AED">AED Emirados Árabes Unidos</option>
-                                    <option value="AFN">AFN Afegão afegão</option>
-                                    <option value="ALL">ALL	Lek albanês</option>
-                                    <option value="AMD">AMD	Dram armênio</option>
-                                    <option value="ANG">ANG	Florim das Antilhas Holandesas</option>
-                                    <option value="AOA">AOA	Kwanza angolano</option>
-                                    <option value="ARS">ARS	Peso argentino</option>
-                                    <option value="AUD">AUD	Dólar australiano</option>
-                                    <option value="BOB">BOB	Boliviano</option>
-                                    <option value="BRL">BRL	real brasileiro</option>
-                                    <option value="BSD">BSD	Dólar das Bahamas</option>
-                                    <option value="CAD">CAD Dólar canadense</option>
-                                    <option value="CHF">CHF	Franco suíço</option>
-                                    <option value="CLP">CLP	Peso Chileno</option>
-                                    <option value="CNY">CNY	Renminbi Chinês</option>
-                                    <option value="COP">COP	Peso colombiano</option>
-                                    <option value="CUC">CUC	Peso cubano</option>
-                                    <option value="EGP">EGP	Libra egípcia</option>
-                                    <option value="EUR">EUR	Euro</option>
-                                    <option value="GBP">GBP	Libra esterlina</option>
-                                    <option value="HKD">HKD	Dólar de Hong Kong</option>
-                                    <option value="JPY">JPY	Yen japonês</option>
-                                    <option value="MXN">MXN	Peso mexicano</option>
-                                    <option value="NOK">NOK	Coroa norueguesa</option>
-                                    <option value="NZD">NZD	Dólar neozelandês</option>
-                                    <option value="PYG">PYG	Guaraní Paraguaio</option>
-                                    <option value="SEK">SEK	Coroa sueca</option>
-                                    <option value="USD">USD	Dólar Americano</option>
-                                    <option value="UYU">UYU	Peso Uruguaio</option>
-                                </select>: "" }
-                                {msgError === "Erro: É necessário selecionar uma moeda base ao invés de cotação"? 
-                                <select onChange={handleChangeMoedaCotacao} style={{border:"0.5px solid black"}}> 
-                                    <option value="">Selecione uma moeda cotacao</option>
-                                    <option value="AED">AED    Emirados Árabes Unidos</option>
-                                    <option value="AFN">AFN    Afegão afegão</option>
-                                    <option value="ALL">ALL	Lek albanês</option>
-                                    <option value="AMD">AMD	Dram armênio</option>
-                                    <option value="ANG">ANG	Florim das Antilhas Holandesas</option>
-                                    <option value="AOA">AOA	Kwanza angolano</option>
-                                    <option value="ARS">ARS	Peso argentino</option>
-                                    <option value="AUD">AUD	Dólar australiano</option>
-                                    <option value="BOB">BOB	Boliviano</option>
-                                    <option value="BRL">BRL	real brasileiro</option>
-                                    <option value="BSD">BSD	Dólar das Bahamas</option>
-                                    <option value="CAD">CAD Dólar canadense</option>
-                                    <option value="CHF">CHF	Franco suíço</option>
-                                    <option value="CLP">CLP	Peso Chileno</option>
-                                    <option value="CNY">CNY	Renminbi Chinês</option>
-                                    <option value="COP">COP	Peso colombiano</option>
-                                    <option value="CUC">CUC	Peso cubano</option>
-                                    <option value="EGP">EGP	Libra egípcia</option>
-                                    <option value="EUR">EUR	Euro</option>
-                                    <option value="GBP">GBP	Libra esterlina</option>
-                                    <option value="HKD">HKD	Dólar de Hong Kong</option>
-                                    <option value="JPY">JPY	Yen japonês</option>
-                                    <option value="MXN">MXN	Peso mexicano</option>
-                                    <option value="NOK">NOK	Coroa norueguesa</option>
-                                    <option value="NZD">NZD	Dólar neozelandês</option>
-                                    <option value="PYG">PYG	Guaraní Paraguaio</option>
-                                    <option value="SEK">SEK	Coroa sueca</option>
-                                    <option value="USD">USD	Dólar Americano</option>
-                                    <option value="UYU">UYU	Peso Uruguaio</option>
-                                </select>: "" }
                         </section>
                         <button onClick={converterMethod} className="buttonConverte"> Converter </button>
                     </div>
                 </div>
                 <div className="divResultado">
-                    <section className="sectionResultadoOne">
-                        <h3 className="tagh3">Resultado da Cotação</h3>
-                        <section className="sectionData">
-                            <label className="labelData">Data da Cotação:  <span className="spanData">{dia}/{mes}/{ano}</span></label>
-                            <label className="labelData">Horário da Cotação: <span className="spanData">{horario}:{minuto}</span></label>
+                    {msgError === "MoedaBaseSelecionado" || msgError === "MoedaBaseCotacaoSelecionado" ? 
+                        <section className="sectionResultadoOne" style={{display:"flex"}}>
+                            <h3 className="tagh3">Resultado da Cotação</h3>
+                            <section className="sectionData" style={{display:"flex"}}>
+                                <label className="labelData">Data da Cotação:  <span className="spanData">{dia}/{mes}/{ano}</span></label>
+                                <label className="labelData">Horário da Cotação: <span className="spanData">{horario}:{minuto}</span></label>
+                            </section>
                         </section>
-                    </section>
+                    : "" }
                     <section  className="sectionResultadoTwo">
-                       <label className="moedaBase">1 {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao['conversion_rate']} BRL</label>
-                       <label className="moedaBaseCotacao">1 {dadosDaRequesicao['base_code']} equivale a  {dadosDaRequesicao['conversion_rate']} {dadosDaRequesicao['target_code']}</label>
-                       <label className="moedaValor">{valor} {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao['conversion_result']} {dadosDaRequesicao['target_code']} </label>
+                        {msgError === "MoedaBaseSelecionado"?  
+                            <label className="moedaBase" style={{display:"flex"}}>{valor} {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao['conversion_result']} BRL</label>
+                         : "" }
+                        {msgError === "MoedaBaseCotacaoSelecionado"?
+                            <label className="moedaValor" style={{display:"flex"}}>{valor} {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao['conversion_result']} {dadosDaRequesicao['target_code']} </label>
+                        : "" }
                     </section>
                 </div>
             </div>

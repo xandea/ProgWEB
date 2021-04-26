@@ -113,7 +113,7 @@
     color: #025c75;
 }
 .sectionResultadoOne{
-    display: flex;
+    display: hidden;
     flex-direction: row;
     margin-left: 65px;
 }
@@ -136,7 +136,7 @@
 }
 
 .sectionResultadoTwo{
-    display: flex;
+    display: hidden;
     flex-direction: column;
     margin-left: 65px;
     padding-bottom: 50px;
@@ -146,6 +146,7 @@
     display: none;
     color: red;
 }
+
 .moedaBase{
     display: none;
 }
@@ -156,7 +157,6 @@
 .moedaValor{
     display: none;
 }
-
 
 
 /* responsividade para @media notebook alexandre*/
