@@ -11,7 +11,17 @@ let http = require('http'),
     
 
     app.get('/', (req,res)=>{
-        res.render('login.hbs')
+        res.render('login.hbs');  
+    });
+
+    app.get('/registro', (req,res)=>{
+        res.render('registro.hbs');  
+    });
+
+    app.post('/registro', async (req,res)=>{
+        console.log("oi");
+        await db.create({email: req.body.email});
+        
     });
 
 
