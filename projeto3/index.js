@@ -15,12 +15,13 @@ let http = require('http'),
     });
 
     app.get('/registro', (req,res)=>{
-        res.render('registro.hbs');  
+        res.render('registro.hbs');
     });
 
-    app.post('/registro', async (req,res)=>{
-        console.log("oi");
-        await db.create({email: req.body.email});
+    app.post('/registro', /*async*/ (req,res)=>{
+        console.log(req.body.email);
+        res.end();
+        //await db.create({email: req.body.email});
         
     });
 
