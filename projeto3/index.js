@@ -2,12 +2,14 @@ let http = require('http'),
     path = require('path'),
     express = require('express'),
     app = express(),
-    db = require('./mvc/model/db');
+    DB = require('./mvc/model/DB');
+    
 
     app.set('view engine', 'hbs');
     app.set('views', path.join(__dirname, 'mvc/view'));
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.urlencoded({extended:false}));
+    app.use(express.json());
     
 
     app.get('/', (req,res)=>{
@@ -18,8 +20,15 @@ let http = require('http'),
         res.render('registro.hbs');
     });
 
-    app.post('/registro', /*async*/ (req,res)=>{
-        console.log(req.body.email);
+    app.post('/registro', async (req,res)=>{
+        //console.log(req.body.email);
+        try{
+            value = await DB.buscar('user'); // buscar funcionando
+            //value = await  DB.enviar('user',req.body.email); //Envio funcioando
+            console.log(value);
+        }catch{
+            console.log("erro");
+        }
         res.end();
         //await db.create({email: req.body.email});
         
