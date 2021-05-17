@@ -10,11 +10,18 @@ module.exports = class DB{
         return db.collection(collection).find().toArray();
     }
 
-    static async enviar (collection,email) {
+    static async cadastrarUsuario (collection,email,senha) {
         let conn = await client.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }),
             db = conn.db('exchange');
             console.log("enviado");
-        return db.collection(collection).insertOne({email:email})
+        return db.collection(collection).insertOne({email: email, senha: senha})
+    }
+
+    static async buscarUsuario (collection,email,senha) {
+        let conn = await client.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }),
+            db = conn.db('exchange');
+            console.log("busqueiUsuario");
+        return db.collection(collection).find({email: email,senha: senha}).toArray();
     }
 };
 

@@ -1,3 +1,5 @@
+const { Db } = require('mongodb');
+
 let http = require('http'),
     path = require('path'),
     express = require('express'),
@@ -12,8 +14,18 @@ let http = require('http'),
     app.use(express.json());
     
 
-    app.get('/', (req,res)=>{
-        res.render('login.hbs');  
+    app.get('/login', (req,res)=>{
+        res.render('login1.hbs');  
+    });
+    app.post('/login', async (req,res)=>{
+        const emailRegex = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+(.[a-z]+)?$/i
+        if (req.body.senha!=="" && emailRegex.test(req.body.email)){
+            let value = await DB.buscarUsuario('user', req.body.email, req.body.senha)
+            console.log(value)
+        }else{
+            console.log("erroUsuario")
+        }
+        //res.end()
     });
 
     app.get('/registro', (req,res)=>{
@@ -21,17 +33,31 @@ let http = require('http'),
     });
 
     app.post('/registro', async (req,res)=>{
+        const emailRegex = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+(.[a-z]+)?$/i
+        if (req.body.senha!=="" && emailRegex.test(req.body.email)){
+            try {           
+                value = await DB.cadastrarUsuario('user',req.body.email,req.body.senha);
+                //localStorage.setItem('@login/email', email)
+                //history.push("/exchange")   
+            } catch (error) { 
+                    console.log(error)  
+            }
+        }else{
+            //setMsgErro("Usuario Incorreto")
+            console.log("email e senha errado")
+        }
         //console.log(req.body.email);
+        /*
         try{
             value = await DB.buscar('user'); // buscar funcionando
-            //value = await  DB.enviar('user',req.body.email); //Envio funcioando
+            //value = await  DB.cadastrarUsuario('user',req.body.email); //Envio funcioando
             console.log(value);
         }catch{
             console.log("erro");
         }
-        res.end();
+        res.end();*/
         //await db.create({email: req.body.email});
-        
+        res.end()  
     });
 
 
