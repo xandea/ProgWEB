@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./../../style/login.css">
+        <title>Teste</title>
+    </head>
+ <body className="bodySingIn">
+        <div className="container">
+            <img src="../../style/image/logoLogin.svg" className="logoTipo" alt="logo"/>
+            <div className="containerInputs">
+                <input
+                className="input" 
+                type="email" 
+                name="user"
+                placeholder="e-mail"
+                onChange={onChangeEmail}
+                />
+                <input
+                className="input"  
+                type="password" 
+                name="senha"
+                placeholder="senha"
+                onChange={onChangePassword}
+                />
+            </div>
+
+            <div className="containerButton">
+                <button className="button" onClick={validationLogin}>Avançar</button>
+            </div>
+
+            {msgErro !== ""? <div className="erroContainerAparecer">{msgErro}</div> : "" }
+
+            <div className="alternativeContainer">
+                <span className="alternative">ou</span>       
+            </div>
+
+            <div className="containerButtonCadastrar">
+                <button className="button" >Cadastrar-se</button>
+            </div>
+            
+            <div>
+                <spam>(DICA) email: eve.holt@reqres.in senha: cityslicka </spam>
+            </div>
+        </div>
+    </body>
+
+</html>

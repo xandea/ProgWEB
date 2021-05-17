@@ -2,11 +2,11 @@ let http = require('http'),
     path = require('path'),
     express = require('express'),
     app = express(),
-    DB = require('./mvc/model/DB');
+    DB = require('./public/mvc/model/DB');
     
 
     app.set('view engine', 'hbs');
-    app.set('views', path.join(__dirname, 'mvc/view'));
+    app.set('views', path.join(__dirname, 'public/mvc/view'));
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.urlencoded({extended:false}));
     app.use(express.json());
