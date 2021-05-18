@@ -1,5 +1,3 @@
-const { Db } = require('mongodb');
-
 let http = require('http'),
     path = require('path'),
     express = require('express'),
@@ -20,8 +18,12 @@ let http = require('http'),
     app.post('/login', async (req,res)=>{
         const emailRegex = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+(.[a-z]+)?$/i
         if (req.body.senha!=="" && emailRegex.test(req.body.email)){
-            let value = await DB.buscarUsuario('user', req.body.email, req.body.senha)
-            console.log(value)
+            try{
+                let value = await DB.buscarUsuario('user', req.body.email, req.body.senha)
+                console.log(value)
+            }catch(error){
+                console.log(error)
+            }  
         }else{
             console.log("erroUsuario")
         }
@@ -43,20 +45,8 @@ let http = require('http'),
                     console.log(error)  
             }
         }else{
-            //setMsgErro("Usuario Incorreto")
             console.log("email e senha errado")
         }
-        //console.log(req.body.email);
-        /*
-        try{
-            value = await DB.buscar('user'); // buscar funcionando
-            //value = await  DB.cadastrarUsuario('user',req.body.email); //Envio funcioando
-            console.log(value);
-        }catch{
-            console.log("erro");
-        }
-        res.end();*/
-        //await db.create({email: req.body.email});
         res.end()  
     });
 
