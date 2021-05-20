@@ -25,12 +25,12 @@ function Example() {
 
     async function validationLogin() {
         const emailRegex = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+(.[a-z]+)?$/i
-        
+
         if (password!=="" && emailRegex.test(email)){
             try {           
                 await axios.post(process.env.REACT_APP_API_URL,{
                 email: email,//"eve.holt@reqres.in",
-                password: password//"cityslicka"
+                senha: password//"cityslicka"
                 })
                 console.log("testando")
                
@@ -38,7 +38,8 @@ function Example() {
                 history.push("/exchange")   
                 
                      
-            } catch (error) { 
+            } catch (error) {
+                    console.log(error) 
                     setMsgErro("Usuario não cadastrado")
                 
                 

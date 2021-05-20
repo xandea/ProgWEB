@@ -59,7 +59,7 @@ function HomePage() {
                         <a className="link-menu" href="/#">SUPORTE PARA NEGÓCIOS <img src={Seta}  className="img-seta" alt=""/></a>
                     </section>
                     <section className="button-header">
-                        <Link to="/signIn"className="button-entrar">Entrar</Link>
+                        <Link to="/login"className="button-entrar">Entrar</Link>
                         <a href="/#" className="button-criar">Criar conta</a>
                     </section>
                 </section>
@@ -73,7 +73,7 @@ function HomePage() {
                     <img className="logo-mobile"src={LogoMobile} alt=""/>
                 </section>
                 <section className="button-container-mobile">
-                    <a href="/#" className="button-header-mobile">Entrar</a>
+                    <a href="/login" className="button-header-mobile">Entrar</a>
                 </section>
             </div>
             <div className="text-principal-container-mobile">
