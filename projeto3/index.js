@@ -38,4 +38,4 @@ app.get('/exchange', (req,res)=>{
     res.render('exchange.hbs');  
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
