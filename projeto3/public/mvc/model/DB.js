@@ -19,9 +19,11 @@ module.exports = class DB{
 
     static async buscarUsuario (collection,email,senha) {
         let conn = await client.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }),
-            db = conn.db('exchange');
+            db = conn.db('exchange'),
+            resultado = await db.collection(collection).find({email: email,senha: senha}).toArray();
             console.log("busqueiUsuario");
-        return db.collection(collection).find({email: email,senha: senha}).toArray();
+            conn.close();
+        return resultado;
     }
 };
 

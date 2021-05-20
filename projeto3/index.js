@@ -2,7 +2,10 @@ let http = require('http'),
     path = require('path'),
     express = require('express'),
     app = express(),
-    DB = require('./public/mvc/model/DB');
+    DB = require('./public/mvc/model/DB'),
+    jwt = require('jsonwebtoken'),
+    jwt_middleware = require('express-jwt'),
+    local = require('localStorage');
     
 
     app.set('view engine', 'hbs');
@@ -10,7 +13,6 @@ let http = require('http'),
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.urlencoded({extended:false}));
     app.use(express.json());
-    
 
     app.get('/login', (req,res)=>{
         res.render('login1.hbs');  
@@ -20,7 +22,13 @@ let http = require('http'),
         if (req.body.senha!=="" && emailRegex.test(req.body.email)){
             try{
                 let value = await DB.buscarUsuario('user', req.body.email, req.body.senha)
-                console.log(value)
+                //res.json(value)
+                const token = jwt.sign({
+                    login: req.body.email
+                  }, 'segredo...');
+                //local.setItem('valor',token);
+                res.json({ token: token });
+                //console.log(value)
             }catch(error){
                 console.log(error)
             }  
@@ -30,9 +38,14 @@ let http = require('http'),
         //res.end()
     });
 
+    /*app.get('/registro', jwt_middleware({ secret: 'segredo...', algorithms: ['HS256']}), (req, res) => {
+        res.json({ message: `super dados secretos de ${req.body.login} - ${req.body.feature}` });
+      });*/
+
     app.get('/registro', (req,res)=>{
         res.render('registro.hbs');
     });
+
 
     app.post('/registro', async (req,res)=>{
         const emailRegex = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+(.[a-z]+)?$/i
@@ -47,7 +60,7 @@ let http = require('http'),
         }else{
             console.log("email e senha errado")
         }
-        res.end()  
+        //res.end()  
     });
 
 
