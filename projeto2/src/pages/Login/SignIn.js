@@ -32,16 +32,16 @@ function Example() {
                 email: email,//"eve.holt@reqres.in",
                 password: password//"cityslicka"
                 })
+                console.log("testando")
                
                 localStorage.setItem('@login/email', email)
                 history.push("/exchange")   
                 
                      
-            } catch (error) {               
-                if(error.response.status===400){
+            } catch (error) { 
                     setMsgErro("Usuario não cadastrado")
                 
-                }
+                
             }
         }else{
             setMsgErro("Usuario Incorreto")
