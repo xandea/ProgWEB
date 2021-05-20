@@ -1,11 +1,7 @@
 let http = require('http'),
     path = require('path'),
     express = require('express'),
-    app = express(),
-    DB = require('./public/model/DB'),
-    jwt = require('jsonwebtoken'),
-    jwt_middleware = require('express-jwt'),
-    local = require('localStorage');
+    app = express();
 
 const userController = require('./public/controller/user-controller');
     
@@ -28,6 +24,8 @@ app.post('/login', userController.postLogin);
     /*app.get('/registro', jwt_middleware({ secret: 'segredo...', algorithms: ['HS256']}), (req, res) => {
         res.json({ message: `super dados secretos de ${req.body.login} - ${req.body.feature}` });
       });*/
+
+app.get('/protegido', userController.getProtegido);      
 
 app.get('/registro', (req,res)=>{
     res.render('registro.hbs');
