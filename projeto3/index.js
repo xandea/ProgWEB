@@ -14,6 +14,10 @@ let http = require('http'),
     app.use(express.urlencoded({extended:false}));
     app.use(express.json());
 
+    app.get('/', (req,res)=>{
+        res.render('principal.hbs');  
+    });
+    
     app.get('/login', (req,res)=>{
         res.render('login1.hbs');  
     });
@@ -45,8 +49,6 @@ let http = require('http'),
     app.get('/registro', (req,res)=>{
         res.render('registro.hbs');
     });
-
-
     app.post('/registro', async (req,res)=>{
         const emailRegex = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+(.[a-z]+)?$/i
         if (req.body.senha!=="" && emailRegex.test(req.body.email)){
@@ -61,6 +63,10 @@ let http = require('http'),
             console.log("email e senha errado")
         }
         //res.end()  
+    });
+
+    app.get('/exchange', (req,res)=>{
+        res.render('exchange.hbs');  
     });
 
 
