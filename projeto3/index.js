@@ -3,9 +3,7 @@ let http = require('http'),
     express = require('express'),
     app = express(),
     DB = require('./public/mvc/model/DB'),
-    jwt = require('jsonwebtoken'),
-    jwt_middleware = require('express-jwt'),
-    local = require('localStorage');
+    jwt = require('jsonwebtoken');
     
 
     app.set('view engine', 'hbs');
@@ -19,7 +17,7 @@ let http = require('http'),
     });
     
     app.get('/login', (req,res)=>{
-        res.render('login1.hbs');  
+        res.render('login.hbs');  
     });
     app.post('/login', async (req,res)=>{
         const emailRegex = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+(.[a-z]+)?$/i
@@ -37,7 +35,7 @@ let http = require('http'),
                 console.log(error)
             }  
         }else{
-            console.log("erroUsuario")
+            console.log("erroUsuario");
         }
         //res.end()
     });
@@ -45,6 +43,34 @@ let http = require('http'),
     /*app.get('/registro', jwt_middleware({ secret: 'segredo...', algorithms: ['HS256']}), (req, res) => {
         res.json({ message: `super dados secretos de ${req.body.login} - ${req.body.feature}` });
       });*/
+
+    app.get('/protegido',ensureToken,(req,res)=>{
+        jwt.verify(req.token, 'segredo...', (err,data)=>{
+            if(err){
+                res.sendStatus(403);
+            }else{
+                res.json({
+                    text: 'protegido',
+                    data: data
+                });
+            }
+        });
+    });
+
+    function ensureToken(req,res,next){
+        const bearerHeader = req.header('authorization')
+        console.log(bearerHeader)
+        if(typeof bearerHeader !== 'undefined'){
+            const bearer = bearerHeader.split(" ");
+            const bearerToken = bearer[1];
+            req.token = bearerToken;
+            //console.log(req.token)
+            next();
+        }else{
+            console.log("erroHeader")
+            res.sendStatus(403);
+        }
+    }
 
     app.get('/registro', (req,res)=>{
         res.render('registro.hbs');
@@ -60,7 +86,7 @@ let http = require('http'),
                     console.log(error)  
             }
         }else{
-            console.log("email e senha errado")
+            console.log("email e senha errado");
         }
         //res.end()  
     });
