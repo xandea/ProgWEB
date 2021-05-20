@@ -3,9 +3,9 @@ const DB = require('../model/DB'),
 
 exports.postLogin = async (req,res)=>{
     const emailRegex = /^[a-z0-9.]+@[a-z0-9]+.[a-z]+(.[a-z]+)?$/i
-    if (req.body.password!=="" && emailRegex.test(req.body.email)){
+    if (req.body.senha!=="" && emailRegex.test(req.body.email)){
         try{
-            let value = await DB.buscarUsuario('user', req.body.email, req.body.password)
+            let value = await DB.buscarUsuario('user', req.body.email, req.body.senha)
             //res.json(value)
             const token = jwt.sign({
                 login: req.body.email
