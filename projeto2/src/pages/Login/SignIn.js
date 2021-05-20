@@ -28,7 +28,7 @@ function Example() {
         
         if (password!=="" && emailRegex.test(email)){
             try {           
-                await axios.post('https://reqres.in/api/login',{
+                await axios.post(process.env.REACT_APP_API_URL,{
                 email: email,//"eve.holt@reqres.in",
                 password: password//"cityslicka"
                 })
