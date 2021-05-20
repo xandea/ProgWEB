@@ -1,7 +1,10 @@
 let http = require('http'),
     path = require('path'),
     express = require('express'),
+    cors = require('cors'),
     app = express();
+    
+app.use(cors());    
 
 const userController = require('./public/controller/user-controller');
     
