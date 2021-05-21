@@ -13,14 +13,6 @@ app.set('views', path.join(__dirname, 'public/view'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
-
-app.get('/', (req,res)=>{
-    res.render('principal.hbs');  
-});
-    
-app.get('/login', (req,res)=>{
-    res.render('login1.hbs');  
-});
     
 app.post('/login', userController.postLogin);
 
@@ -35,10 +27,5 @@ app.get('/registro', (req,res)=>{
 });
     
 app.post('/registro', userController.postRegistro);
-
-
-app.get('/exchange', (req,res)=>{
-    res.render('exchange.hbs');  
-});
 
 app.listen(process.env.PORT || 3000);
