@@ -23,7 +23,7 @@ function HomePage() {
             setUsuario(localStorage.getItem('@login/email'))
             history.push("/exchange")
         }else{
-            history.push("/SignIn")  
+            history.push("/login")  
         }
         //const emailValeu = e.target.value
         //setEmail(emailValeu)

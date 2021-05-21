@@ -78,6 +78,7 @@ function IndexExchange(){
     
     const deslogar = (e) =>{
         localStorage.removeItem('@login/email');
+        localStorage.removeItem('@login/tokin');
     }
 
     function VerificaUsuarioLogado(){

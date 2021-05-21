@@ -3,7 +3,7 @@ import React, {/*Component,*/ /*useEffect,*/ useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom'
 import LogoAzul from './../../Images/logoLogin.svg';
-import './SignIn.css';
+import '../Login/SignIn.css';
 
 
 function Example() {
@@ -28,29 +28,20 @@ function Example() {
 
         if (password!=="" && emailRegex.test(email)){
             try {           
-                const resultado = await axios.post(process.env.REACT_APP_API_URL+"/login",{
+                const resultado = await axios.post(process.env.REACT_APP_API_URL+"/registro",{
                 email: email,//"eve.holt@reqres.in",
                 senha: password//"cityslicka"
                 })
-               
-                localStorage.setItem('@login/email', email)
-                localStorage.setItem('@login/tokin', resultado.data['token'])
-                history.push("/exchange")   
-                
-                     
+                console.log(resultado)
+                history.push("/login")            
             } catch (error) {
-                    console.log(error) 
-                    setMsgErro("Usuario não cadastrado")   
+                    console.log(error)  
             }
         }else{
             setMsgErro("Usuario Incorreto")
            
         }
     }
-
-   
-
-    
   
     return(
     <body className="bodySingIn">
@@ -74,7 +65,7 @@ function Example() {
             </div>
 
             <div className="containerButton">
-                <button className="button" onClick={validationLogin}>Avançar</button>
+                <button className="button" onClick={validationLogin}>Cadastrar-se</button>
             </div>
 
             {msgErro !== ""? <div className="erroContainerAparecer">{msgErro}</div> : "" }
@@ -85,13 +76,10 @@ function Example() {
 
             <div className="containerButtonCadastrar">
                 <button onClick={()=> {
-                history.push("/registro");}}
-                className="button" >Cadastrar-se</button>
+                history.push("/login");}}
+                className="button" >Voltar</button>
             </div>
             
-            <div>
-                <spam>(DICA) email: eve.holt@reqres.in senha: cityslicka </spam>
-            </div>
         </div>
     </body>
         

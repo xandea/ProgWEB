@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Exchange from './pages/Exchange/IndexExchange';
 import SignIn from './pages/Login/SignIn';
+import Registro from './pages/Registro/Registro.js';
 import HomePage from './pages/Home/HomePage';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
@@ -13,6 +14,7 @@ ReactDOM.render(
       <Route path="/" exact={true} component={HomePage} />
       <Route path="/login"  component={SignIn} />
       <Route path="/exchange" component={Exchange} />
+      <Route path="/registro"  component={Registro} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')
