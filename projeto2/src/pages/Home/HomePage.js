@@ -16,6 +16,7 @@ import BradescoIcon from './../../Images/bradesco-icon.png';
 function HomePage() {
     const history = useHistory();
     const [usuario, setUsuario] = useState(null)
+    const [rota,setRota] = useState("/registro")
 
     const realizarCotação = (e) => {
         //setUsuario(localStorage.getItem('@login/email'))
@@ -37,6 +38,7 @@ function HomePage() {
             console.log("entrei")
             document.getElementsByClassName("button-entrar")[0].style.display="none"
             document.getElementsByClassName("button-criar")[0].innerHTML="Bem Vindo: "+usuario
+            setRota("/exchange")
         }else{
             document.getElementsByClassName("button-entrar")[0].style.display="flex"
         }
@@ -60,7 +62,7 @@ function HomePage() {
                     </section>
                     <section className="button-header">
                         <Link to="/login"className="button-entrar">Entrar</Link>
-                        <a href="/registro" className="button-criar">Criar conta</a>
+                        <a href={rota} className="button-criar">Criar conta</a>
                     </section>
                 </section>
             </header>

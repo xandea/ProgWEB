@@ -81,12 +81,22 @@ function IndexExchange(){
         localStorage.removeItem('@login/tokin');
     }
 
-    function VerificaUsuarioLogado(){
+    async function VerificaUsuarioLogado() {
         const usuario = localStorage.getItem('@login/tokin');
-        //console.log(usuario);
+        /*//console.log(usuario);
         if(usuario === null){
             history.push('/login');
+        }*/
+        try{
+        const resultado = await axios.get(process.env.REACT_APP_API_URL+"/exchange",{
+            headers: { 'authorization': usuario}
+        })
+        //console.log(resultado.status)
+        }catch(error){
+            console.log(error)
+            history.push('/login')
         }
+        
     }
 
     useEffect(() => {
