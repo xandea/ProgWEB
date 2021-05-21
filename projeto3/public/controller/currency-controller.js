@@ -20,7 +20,7 @@ exports.GetMoeda = async(req, res) =>{
     try {
         const verifica = await DB.buscarMoeda('currency')
         if (verifica.length !== 0){
-            buscaMoeda = DB.buscarMoeda('currency')
+            res.json({verifica}); 
             res.sendStatus(200)
             
         }else{
