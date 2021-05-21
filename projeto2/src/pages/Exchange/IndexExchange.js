@@ -20,6 +20,7 @@ function IndexExchange(){
     const [valorMoeda,setValorMoeda] = useState("");
     const [valorMoedaReal, setValorMoedaReal] = useState("");
     const [msgCadastro,setMsgCadastro] = useState("");
+    const [moedas,setMoedas] = useState();
     
 
     const history = useHistory();
@@ -115,7 +116,6 @@ function IndexExchange(){
                     setMostrarCadastro({display: "none"})
                 }       
             } catch (error) {
-                console.log('entrei')
                 console.log(error)
                 setMsgCadastro('Erro: Moeda já cadastrada');  
             }
@@ -124,10 +124,31 @@ function IndexExchange(){
         }
     }
     async function buscaMoeda(){
-        let resultado = await axios.get(process.env.REACT_APP_API_URL+"/buscarMoeda")
-        console(resultado)
+        try {
+            let resultado = await axios.get(process.env.REACT_APP_API_URL+"/buscarMoeda")
+            setMoedas(resultado.data.verifica)
+            console.log(resultado.data.verifica)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
+    function geraOption(){
+        var i =0,
+            select = document.getElementsByClassName("select");
+           
+        for(i=0; i<moedas.lenght; i++){
+            var option = document.createElement("option");
+
+            option.value = moedas[i].index;
+            option.text = moedas[i].nome;
+
+            //select.append(option)
+            console.log('entrei no for');
+        }
+        console.log('entrei no geraOption')
+    }
+    
     const deslogar = (e) =>{
         localStorage.removeItem('@login/email');
         localStorage.removeItem('@login/tokin');
@@ -221,13 +242,15 @@ function IndexExchange(){
                         <section className="sectionInformacao">
                             <label className="labelInformacao">Cotar de</label>
                                 <select onChange={handleChangeMoedaBase} onClick={buscaMoeda} className="select" style={mudaEstiloOne}>
-                                    
+                                    <option>Selecione uma moeda Base</option>
+                                    {moedas !== undefined ? geraOption() : "" }
                                 </select>
                         </section>
                         <section className="sectionInformacao">
                             <label className="labelInformacao">Para</label>
                                 <select onChange={handleChangeMoedaCotacao} onClick={buscaMoeda} className="select" style={mudaEstiloTwo}> 
-                                    
+                                    <option>Selecione uma moeda Cotação</option>
+                                    {moedas !== undefined ? geraOption() : "" }
                                 </select>
                         </section>
                         <button onClick={converterMethod} className="buttonConverte"> Converter </button>
