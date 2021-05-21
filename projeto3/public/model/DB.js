@@ -25,6 +25,31 @@ module.exports = class DB{
             conn.close();
         return resultado;
     }
+
+    //PARA CADAS E BUSCAR MOEDA
+    static async cadastrarMoeda (collection,index,nome, valorMoeda, valorMoedaReal) {
+        let conn = await client.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }),
+            db = conn.db('exchange');
+        return db.collection(collection).insertOne({index: index, nome: nome, valorMoeda: valorMoeda, valorMoedaReal: valorMoedaReal})
+    }
+
+    static async buscarMoeda (collection) {
+        let conn = await client.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }),
+            db = conn.db('exchange'),
+            resultado = await db.collection(collection).find().toArray();
+            conn.close();
+        return resultado;
+    }
+
+    static async verificaMoeda (collection, index) {
+        let conn = await client.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }),
+            db = conn.db('exchange'),
+            resultado = await db.collection(collection).find({index: index}).toArray();
+            conn.close();
+        return resultado;
+    }
+
+
 };
 
 /*
