@@ -34,10 +34,10 @@ exports.postRegistro = async (req,res)=>{
         }
     }
 
-exports.getProtegido = ensureToken, (req,res)=>{
-    jwt.verify(req.token, 'segredo...', (err,data)=>{
+exports.getProtegido = (req,res)=>{
+    jwt.verify(req.headers['authorization'], 'segredo...', (err,data)=>{
         if(err){
-            res.sendStatus(403);
+            res.sendStatus(401);
         }else{
             res.json({
                 text: 'protegido',
@@ -48,12 +48,13 @@ exports.getProtegido = ensureToken, (req,res)=>{
 }    
 
 function ensureToken(req,res,next){
-    const bearerHeader = req.header('authorization')
-    console.log(bearerHeader)
+    const bearerHeader = req.headers['authorization']
+    
     if(typeof bearerHeader !== 'undefined'){
-        const bearer = bearerHeader.split(" ");
-        const bearerToken = bearer[1];
-        req.token = bearerToken;
+       // const bearer = bearerHeader.split("");
+       // const bearerToken = bearer[1];
+        req.token = bearerHeader;
+        console.log(req.token)
         next();
     }else{
        console.log("erroHeader");

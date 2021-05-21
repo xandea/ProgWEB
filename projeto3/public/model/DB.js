@@ -13,7 +13,7 @@ module.exports = class DB{
     static async cadastrarUsuario (collection,email,senha) {
         let conn = await client.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }),
             db = conn.db('exchange');
-            console.log("enviado");
+            //console.log("enviado");
         return db.collection(collection).insertOne({email: email, senha: senha})
     }
 
@@ -21,7 +21,7 @@ module.exports = class DB{
         let conn = await client.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }),
             db = conn.db('exchange'),
             resultado = await db.collection(collection).find({email: email,senha: senha}).toArray();
-            console.log("busqueiUsuario");
+            //console.log("busqueiUsuario");
             conn.close();
         return resultado;
     }
