@@ -88,10 +88,6 @@ function Example() {
                 history.push("/registro");}}
                 className="button" >Cadastrar-se</button>
             </div>
-            
-            <div>
-                <spam>(DICA) email: eve.holt@reqres.in senha: cityslicka </spam>
-            </div>
         </div>
     </body>
         

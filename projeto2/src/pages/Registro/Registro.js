@@ -29,16 +29,17 @@ function Example() {
         if (password!=="" && emailRegex.test(email)){
             try {           
                 const resultado = await axios.post(process.env.REACT_APP_API_URL+"/registro",{
-                email: email,//"eve.holt@reqres.in",
-                senha: password//"cityslicka"
+                email: email,
+                senha: password
                 })
                 console.log(resultado)
                 history.push("/login")            
             } catch (error) {
-                    console.log(error)  
+                console.log(error)
+                setMsgErro("Usuario já cadastrado")  
             }
         }else{
-            setMsgErro("Usuario Incorreto")
+            setMsgErro("Formato de Usuario Incorreto")
            
         }
     }
@@ -76,8 +77,8 @@ function Example() {
 
             <div className="containerButtonCadastrar">
                 <button onClick={()=> {
-                history.push("/login");}}
-                className="button" >Voltar</button>
+                history.push("/login")}}
+                className="button" >Voltar para Login</button>
             </div>
             
         </div>

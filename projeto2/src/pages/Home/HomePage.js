@@ -60,7 +60,7 @@ function HomePage() {
                     </section>
                     <section className="button-header">
                         <Link to="/login"className="button-entrar">Entrar</Link>
-                        <a href="/#" className="button-criar">Criar conta</a>
+                        <a href="/registro" className="button-criar">Criar conta</a>
                     </section>
                 </section>
             </header>
@@ -92,7 +92,7 @@ function HomePage() {
                     </div>
                     <div className="area-button"> 
                         <button className="text-button">
-                            <a href="/#" className="text-button-link">Crie uma conta grátis</a>
+                            <a href="/registro" className="text-button-link">Crie uma conta grátis</a>
                         </button>
                     </div>
                     <section className="area-bank"> 

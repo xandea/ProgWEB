@@ -82,10 +82,10 @@ function IndexExchange(){
     }
 
     function VerificaUsuarioLogado(){
-        const usuario = localStorage.getItem('@login/email');
-        console.log(usuario);
+        const usuario = localStorage.getItem('@login/tokin');
+        //console.log(usuario);
         if(usuario === null){
-            history.push('SignIn');
+            history.push('/login');
         }
     }
 
