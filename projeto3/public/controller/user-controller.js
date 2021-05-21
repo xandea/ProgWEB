@@ -29,7 +29,8 @@ exports.postRegistro = async (req,res)=>{
         try {           
             value = await DB.cadastrarUsuario('user',req.body.email,req.body.senha);
                 //localStorage.setItem('@login/email', email)
-                //history.push("/exchange")   
+                //history.push("/exchange")
+            res.sendStatus(200)       
         } 
         catch (error) { 
                 console.log(error)  
