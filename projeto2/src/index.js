@@ -13,8 +13,8 @@ ReactDOM.render(
     <Switch>
       <Route path="/" exact={true} component={HomePage} />
       <Route path="/login"  component={SignIn} />
-      <Route path="/exchange" component={Exchange} />
       <Route path="/registro"  component={Registro} />
+      <Route path="/exchange" component={Exchange} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')

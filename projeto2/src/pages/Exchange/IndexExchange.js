@@ -14,6 +14,13 @@ function IndexExchange(){
     const [msgError,setMsgError] = useState("");
     const [mudaEstiloOne,setMudaEstiloOne] = useState();
     const [mudaEstiloTwo,setMudaEstiloTwo] = useState();
+    const [mostraCadastro, setMostrarCadastro] = useState();
+    const [index, setIndex] = useState("");
+    const [nome, setNome] = useState("");
+    const [valorMoeda,setValorMoeda] = useState("");
+    const [valorMoedaReal, setValorMoedaReal] = useState("");
+    const [msgCadastro,setMsgCadastro] = useState("");
+    
 
     const history = useHistory();
 
@@ -24,7 +31,7 @@ function IndexExchange(){
     const horario = data.getHours();
     const minuto = data.getUTCMinutes();
     
-    
+    //PARA CONSULTAR MOEDA
     const handleChangeMoedaBase =(e)=>{
         const moedaBaseValue = e.target.value;
         setMoedaBase(moedaBaseValue);
@@ -39,9 +46,24 @@ function IndexExchange(){
         const valorValue = e.target.value;
         setValor(valorValue);
     }
-
-    
-
+    //PARA O CADASTRO DA MOEDA
+    const handleChangeIndex = (e) =>{
+        const indexValue = e.target.value;
+        setIndex(indexValue);
+    }
+    const handleChangeNome = (e) =>{
+        const nomeValue = e.target.value;
+        setNome(nomeValue);
+    }
+    const handleChangeValorMoeda = (e) =>{
+        const valorMoedaValue = e.target.value;
+        setValorMoeda(valorMoedaValue);
+    }
+    const handleChangeValorMoedaReal = (e) =>{
+        const valorMoedaRealValue = e.target.value;
+        setValorMoedaReal(valorMoedaRealValue);
+    }
+    //PARA VERIFICAÇÃO DE ERRO E CONSULTA
     const converterMethod = async ()=>{
         if(moedaBase === "" && moedaCotacao ===""){
             setMsgError("Erro: É necessário selecionar uma moeda base");
@@ -75,23 +97,47 @@ function IndexExchange(){
         }
         
     }
-    
+    const mostraCadastrarMoeda = async ()=>{
+        setMostrarCadastro({display: "flex"});
+    }
+    async function cadastrarMoeda() {
+        if (index !=="" && nome!=="" && valorMoeda !=="" && valorMoedaReal !==""){
+            try {           
+                let resultado = await axios.post(process.env.REACT_APP_API_URL+"/cadastrarMoeda",{
+                index: index,
+                nome: nome,
+                valorMoeda:valorMoeda,
+                valorMoedaReal:valorMoedaReal
+                })
+
+                if (resultado.status === 200){
+                    setMsgCadastro('MoedaCorreta');
+                    setMostrarCadastro({display: "none"})
+                }       
+            } catch (error) {
+                console.log('entrei')
+                console.log(error)
+                setMsgCadastro('Erro: Moeda já cadastrada');  
+            }
+        }else{
+            setMsgCadastro('Erro: Formato de moeda incorreto');
+        }
+    }
+    async function buscaMoeda(){
+        let resultado = await axios.get(process.env.REACT_APP_API_URL+"/buscarMoeda")
+        console(resultado)
+    }
+
     const deslogar = (e) =>{
         localStorage.removeItem('@login/email');
         localStorage.removeItem('@login/tokin');
     }
-
     async function VerificaUsuarioLogado() {
         const usuario = localStorage.getItem('@login/tokin');
-        /*//console.log(usuario);
-        if(usuario === null){
-            history.push('/login');
-        }*/
         try{
         const resultado = await axios.get(process.env.REACT_APP_API_URL+"/exchange",{
             headers: { 'authorization': usuario}
         })
-        //console.log(resultado.status)
         }catch(error){
             console.log(error)
             history.push('/login')
@@ -116,11 +162,56 @@ function IndexExchange(){
                     <div className="divImgLogoAzul">
                         <img src={LogoAzul} className="logoazul" alt="logo"/>
                     </div>
+                    <div>
+                        <button onClick={mostraCadastrarMoeda} className="buttonConverte">Cadastrar Moeda</button>
+                    </div>
+                </div>
+                <div className="divCadastroMoeda" style={mostraCadastro}>
+                    <h2 className="tagh2">Cadastrar Moeda</h2>
+                    <div className="formCadastrarMoeda">
+                    {msgCadastro !== "MoedaCorreta" ? <span className="msgError" style={{display:"flex", color:"red"}}>{msgCadastro}</span> : "" }
+                        <section className = "sectionInputs">
+                            <label for="index" className="labelForm">Index</label>
+                            <input
+                                    type="text" 
+                                    id="index" 
+                                    name="index"
+                                    onChange={handleChangeIndex}/>
+                        </section>
+                        <section className = "sectionInputs">
+                            <label for="nome" className="labelForm">Nome</label>
+                            <input 
+                                    type="text" 
+                                    id="Nome" 
+                                    name="nome"
+                                    onChange={handleChangeNome}/>
+                        </section>
+                        <section className = "sectionInputs">
+                            <label for="valor" className="labelForm">Valor</label>
+                            <input 
+                                    type="text" 
+                                    id="valor" 
+                                    name="valor"
+                                    onChange={handleChangeValorMoeda}/>
+                        </section>
+                        <section className = "sectionInputs">
+                            <label for="valorReal" className="labelForm">Valor da moeda em REAL</label>
+                            <input 
+                                    type="text" 
+                                    id="valorReal" 
+                                    name="valorReal"
+                                    onChange={handleChangeValorMoedaReal}/>
+                        </section>
+                        <section className="sectionInputs">     
+                            <button className="buttonConverte" onClick={cadastrarMoeda} name="enviar"> Cadastrar </button>
+                        </section>
+                    </div>
                 </div>
                 <section className="textCotacao">
                     <h2 className="tagh2">Cotação de Moedas</h2>
                 </section>
                 <div className="divInformacao">
+                    {msgCadastro === "MoedaCorreta" ? <span className="msgError" style={{display:"flex", color:"green"}}>Moeda cadastrada com sucesso !!</span> : "" }
                     {msgError !== "MoedaBaseSelecionado" && msgError !== "MoedaBaseCotacaoSelecionado"  ? <span className="msgError" style={{display:"flex"}}>{msgError}</span> : "" }
                     <div className="subDivInformacao">
                         <section className="sectionInformacao"> 
@@ -129,72 +220,14 @@ function IndexExchange(){
                         </section>
                         <section className="sectionInformacao">
                             <label className="labelInformacao">Cotar de</label>
-                                <select onChange={handleChangeMoedaBase} className="select" style={mudaEstiloOne}>
-                                    <option value="">Selecione uma moeda base</option>
-                                    <option value="AED">AED Emirados Árabes Unidos</option>
-                                    <option value="AFN">AFN Afegão afegão</option>
-                                    <option value="ALL">ALL	Lek albanês</option>
-                                    <option value="AMD">AMD	Dram armênio</option>
-                                    <option value="ANG">ANG	Florim das Antilhas Holandesas</option>
-                                    <option value="AOA">AOA	Kwanza angolano</option>
-                                    <option value="ARS">ARS	Peso argentino</option>
-                                    <option value="AUD">AUD	Dólar australiano</option>
-                                    <option value="BOB">BOB	Boliviano</option>
-                                    <option value="BRL">BRL	real brasileiro</option>
-                                    <option value="BSD">BSD	Dólar das Bahamas</option>
-                                    <option value="CAD">CAD Dólar canadense</option>
-                                    <option value="CHF">CHF	Franco suíço</option>
-                                    <option value="CLP">CLP	Peso Chileno</option>
-                                    <option value="CNY">CNY	Renminbi Chinês</option>
-                                    <option value="COP">COP	Peso colombiano</option>
-                                    <option value="CUC">CUC	Peso cubano</option>
-                                    <option value="EGP">EGP	Libra egípcia</option>
-                                    <option value="EUR">EUR	Euro</option>
-                                    <option value="GBP">GBP	Libra esterlina</option>
-                                    <option value="HKD">HKD	Dólar de Hong Kong</option>
-                                    <option value="JPY">JPY	Yen japonês</option>
-                                    <option value="MXN">MXN	Peso mexicano</option>
-                                    <option value="NOK">NOK	Coroa norueguesa</option>
-                                    <option value="NZD">NZD	Dólar neozelandês</option>
-                                    <option value="PYG">PYG	Guaraní Paraguaio</option>
-                                    <option value="SEK">SEK	Coroa sueca</option>
-                                    <option value="USD">USD	Dólar Americano</option>
-                                    <option value="UYU">UYU	Peso Uruguaio</option>
+                                <select onChange={handleChangeMoedaBase} onClick={buscaMoeda} className="select" style={mudaEstiloOne}>
+                                    
                                 </select>
                         </section>
                         <section className="sectionInformacao">
                             <label className="labelInformacao">Para</label>
-                                <select onChange={handleChangeMoedaCotacao} className="select" style={mudaEstiloTwo}> 
-                                    <option value="">Selecione uma moeda cotacao</option>
-                                    <option value="AED">AED  Emirados Árabes Unidos</option>
-                                    <option value="AFN">AFN  Afegão afegão</option>
-                                    <option value="ALL">ALL	Lek albanês</option>
-                                    <option value="AMD">AMD	Dram armênio</option>
-                                    <option value="ANG">ANG	Florim das Antilhas Holandesas</option>
-                                    <option value="AOA">AOA	Kwanza angolano</option>
-                                    <option value="ARS">ARS	Peso argentino</option>
-                                    <option value="AUD">AUD	Dólar australiano</option>
-                                    <option value="BOB">BOB	Boliviano</option>
-                                    <option value="BRL">BRL	real brasileiro</option>
-                                    <option value="BSD">BSD	Dólar das Bahamas</option>
-                                    <option value="CAD">CAD Dólar canadense</option>
-                                    <option value="CHF">CHF	Franco suíço</option>
-                                    <option value="CLP">CLP	Peso Chileno</option>
-                                    <option value="CNY">CNY	Renminbi Chinês</option>
-                                    <option value="COP">COP	Peso colombiano</option>
-                                    <option value="CUC">CUC	Peso cubano</option>
-                                    <option value="EGP">EGP	Libra egípcia</option>
-                                    <option value="EUR">EUR	Euro</option>
-                                    <option value="GBP">GBP	Libra esterlina</option>
-                                    <option value="HKD">HKD	Dólar de Hong Kong</option>
-                                    <option value="JPY">JPY	Yen japonês</option>
-                                    <option value="MXN">MXN	Peso mexicano</option>
-                                    <option value="NOK">NOK	Coroa norueguesa</option>
-                                    <option value="NZD">NZD	Dólar neozelandês</option>
-                                    <option value="PYG">PYG	Guaraní Paraguaio</option>
-                                    <option value="SEK">SEK	Coroa sueca</option>
-                                    <option value="USD">USD	Dólar Americano</option>
-                                    <option value="UYU">UYU	Peso Uruguaio</option>
+                                <select onChange={handleChangeMoedaCotacao} onClick={buscaMoeda} className="select" style={mudaEstiloTwo}> 
+                                    
                                 </select>
                         </section>
                         <button onClick={converterMethod} className="buttonConverte"> Converter </button>
