@@ -127,7 +127,7 @@ function IndexExchange(){
         try {
             let resultado = await axios.get(process.env.REACT_APP_API_URL+"/buscarMoeda")
             setMoedas(resultado.data.verifica)
-            console.log(resultado.data.verifica)
+            //console.log(resultado.data.verifica)
         } catch (error) {
             console.log(error)
         }
@@ -135,16 +135,18 @@ function IndexExchange(){
 
     function geraOption(){
         var i =0,
-            select = document.getElementsByClassName("select");
-           
-        for(i=0; i<moedas.lenght; i++){
-            var option = document.createElement("option");
-
-            option.value = moedas[i].index;
-            option.text = moedas[i].nome;
+        select = document.getElementsByClassName('select')[0];
+        for(i=0; i<Object.keys(moedas).length; i++){
+            var option = document.createElement('option');
+            option.value = i;
+            option.innerHTML = i;
+            select.appendChild(option);
+            console.log("dei append")
+            //option.value = moedas[i].index;
+            //option.text = moedas[i].nome;
 
             //select.append(option)
-            console.log('entrei no for');
+            //console.log('entrei no for');
         }
         console.log('entrei no geraOption')
     }
