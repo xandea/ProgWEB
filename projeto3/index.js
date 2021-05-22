@@ -27,4 +27,6 @@ app.post('/cadastrarMoeda', currencyController.PostMoeda);
 
 app.get('/buscarMoeda', currencyController.GetMoeda);
 
+app.get('/pair', currencyController.GetPair);
+
 app.listen(process.env.PORT || 3000);

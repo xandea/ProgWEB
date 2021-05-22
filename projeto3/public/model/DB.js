@@ -6,14 +6,12 @@ module.exports = class DB{
     static async buscar (collection) {
         let conn = await client.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }),
             db = conn.db('exchange');
-            //console.log("entrei");
         return db.collection(collection).find().toArray();
     }
 
     static async cadastrarUsuario (collection,email,senha) {
         let conn = await client.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }),
             db = conn.db('exchange');
-            //console.log("enviado");
         return db.collection(collection).insertOne({email: email, senha: senha})
     }
 
@@ -21,7 +19,6 @@ module.exports = class DB{
         let conn = await client.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }),
             db = conn.db('exchange'),
             resultado = await db.collection(collection).find({email: email,senha: senha}).toArray();
-            //console.log("busqueiUsuario");
             conn.close();
         return resultado;
     }
@@ -47,6 +44,13 @@ module.exports = class DB{
             resultado = await db.collection(collection).find({index: index}).toArray();
             conn.close();
         return resultado;
+    }
+
+    static async buscarParMoeda(collection, moedaBase, moedaCotacao){
+        let conn = await client.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }),
+            db = conn.db('exchange');
+            conn.close();
+        return await db.collection(collection).find({index: moedaBase, index: moedaCotacao}).toArray();
     }
 
 
