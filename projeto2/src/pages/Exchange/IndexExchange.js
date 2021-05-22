@@ -31,6 +31,8 @@ function IndexExchange(){
     const ano = data.getFullYear();
     const horario = data.getHours();
     const minuto = data.getUTCMinutes();
+
+    var cont = 0;
     
     //PARA CONSULTAR MOEDA
     const handleChangeMoedaBase =(e)=>{
@@ -78,8 +80,8 @@ function IndexExchange(){
             setMudaEstiloTwo({border:"0.5px solid black"});
         }
         else if(moedaBase!=="" && moedaCotacao ===""){
-            const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
-            moedaBase+'/BRL/'+valor);
+            const resposta = await axios.get(process.env.REACT_APP_API_URL+'/pair',
+                                            {moedaBase: moedaBase, moedaCotacao:'BRL'});
             const dadosDaRequesicaoValue = resposta.data;
             setDadosDaRequisicao(dadosDaRequesicaoValue);
             setMsgError("MoedaBaseSelecionado");
@@ -87,8 +89,8 @@ function IndexExchange(){
             setMudaEstiloTwo({border:"0.5px solid black"});
         }
         else{
-            const resposta = await axios.get('https://v6.exchangerate-api.com/v6/863768c8d54f6b4767d23e6a/pair/'+
-                                          moedaBase+'/'+moedaCotacao+'/'+valor);
+            const resposta = await axios.get(process.env.REACT_APP_API_URL+'/pair',
+                                            {moedaBase: moedaBase, moedaCotacao:moedaCotacao});
             const dadosDaRequesicaoValue = resposta.data;
             setDadosDaRequisicao(dadosDaRequesicaoValue); 
             setMsgError("MoedaBaseCotacaoSelecionado");
@@ -110,10 +112,18 @@ function IndexExchange(){
                 valorMoeda:valorMoeda,
                 valorMoedaReal:valorMoedaReal
                 })
-
-                if (resultado.status === 200){
-                    setMsgCadastro('MoedaCorreta');
+                if(resultado.status === 200){
+                    setMsgError('MoedaCorreta');
                     setMostrarCadastro({display: "none"})
+                    //Insere no select a nova moeda
+                    var select = document.getElementsByClassName('select')[0],
+                        selectTwo = document.getElementsByClassName('select')[1],
+                        option = document.createElement('option');
+
+                        option.value = index;
+                        option.innerHTML = index +'  '+nome;
+                        select.appendChild(option);
+                        selectTwo.appendChild(option);
                 }       
             } catch (error) {
                 console.log(error)
@@ -127,28 +137,22 @@ function IndexExchange(){
         try {
             let resultado = await axios.get(process.env.REACT_APP_API_URL+"/buscarMoeda")
             setMoedas(resultado.data.verifica)
-            //console.log(resultado.data.verifica)
         } catch (error) {
             console.log(error)
         }
     }
-
+ 
     function geraOption(){
-        var i =0,
-        select = document.getElementsByClassName('select')[0];
+        var i =0, 
+            selectTwo =document.getElementsByClassName('select')[1],
+            select = document.getElementsByClassName('select')[0];
         for(i=0; i<Object.keys(moedas).length; i++){
-            var option = document.createElement('option');
-            option.value = i;
-            option.innerHTML = i;
-            select.appendChild(option);
-            console.log("dei append")
-            //option.value = moedas[i].index;
-            //option.text = moedas[i].nome;
-
-            //select.append(option)
-            //console.log('entrei no for');
+                var option = document.createElement('option');
+                option.value = moedas[i].index;
+                option.innerHTML = moedas[i].index +'  '+ moedas[i].nome;
+                select.appendChild(option);
+                selectTwo.appendChild(option);
         }
-        console.log('entrei no geraOption')
     }
     
     const deslogar = (e) =>{
@@ -234,8 +238,8 @@ function IndexExchange(){
                     <h2 className="tagh2">Cotação de Moedas</h2>
                 </section>
                 <div className="divInformacao">
-                    {msgCadastro === "MoedaCorreta" ? <span className="msgError" style={{display:"flex", color:"green"}}>Moeda cadastrada com sucesso !!</span> : "" }
-                    {msgError !== "MoedaBaseSelecionado" && msgError !== "MoedaBaseCotacaoSelecionado"  ? <span className="msgError" style={{display:"flex"}}>{msgError}</span> : "" }
+                    {msgError === "MoedaCorreta" ? <span className="msgError" style={{display:"flex", color:"green"}}>Moeda cadastrada com sucesso !!</span> : "" }
+                    {msgError !== "MoedaBaseSelecionado" && msgError !== "MoedaBaseCotacaoSelecionado" &&msgError !== "MoedaCorreta" ? <span className="msgError" style={{display:"flex"}}>{msgError}</span> : "" }
                     <div className="subDivInformacao">
                         <section className="sectionInformacao"> 
                             <label className="labelInformacao">Valor</label>
@@ -244,14 +248,14 @@ function IndexExchange(){
                         <section className="sectionInformacao">
                             <label className="labelInformacao">Cotar de</label>
                                 <select onChange={handleChangeMoedaBase} onClick={buscaMoeda} className="select" style={mudaEstiloOne}>
-                                    <option>Selecione uma moeda Base</option>
+                                    <option value="">Selecione uma moeda Base</option>
                                     {moedas !== undefined ? geraOption() : "" }
                                 </select>
                         </section>
                         <section className="sectionInformacao">
                             <label className="labelInformacao">Para</label>
                                 <select onChange={handleChangeMoedaCotacao} onClick={buscaMoeda} className="select" style={mudaEstiloTwo}> 
-                                    <option>Selecione uma moeda Cotação</option>
+                                    <option value="">Selecione uma moeda Cotação</option>
                                     {moedas !== undefined ? geraOption() : "" }
                                 </select>
                         </section>
@@ -270,10 +274,10 @@ function IndexExchange(){
                     : "" }
                     <section  className="sectionResultadoTwo">
                         {msgError === "MoedaBaseSelecionado"?  
-                            <label className="moedaBase" style={{display:"flex"}}>{valor} {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao['conversion_result']} BRL</label>
+                            <label className="moedaBase" style={{display:"flex"}}>{valor} {dadosDaRequesicao['moedaBase']} equivale a {dadosDaRequesicao['conversion_result']} BRL</label>
                          : "" }
                         {msgError === "MoedaBaseCotacaoSelecionado"?
-                            <label className="moedaValor" style={{display:"flex"}}>{valor} {dadosDaRequesicao['base_code']} equivale a {dadosDaRequesicao['conversion_result']} {dadosDaRequesicao['target_code']} </label>
+                            <label className="moedaValor" style={{display:"flex"}}>{valor} {dadosDaRequesicao['moedaBase']} equivale a {dadosDaRequesicao['conversion_result']} {dadosDaRequesicao['moedaCotacao']} </label>
                         : "" }
                     </section>
                 </div>
